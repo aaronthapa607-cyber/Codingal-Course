@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Details — Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root{
+        --bg1: #f6f8ff;
+        --bg2: #eef6ff;
+        --accent: #5b6cff;
+        --accent-2: #9bd3ff;
+        --muted: #6b7280;
+        --card: #ffffff;
+        --radius: 14px;
+        --shadow: 0 6px 24px rgba(35,44,80,0.08);
+        font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      }
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      body{
+        margin:0;
+        background: linear-gradient(180deg,var(--bg1),var(--bg2));
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:48px 20px;
+        color:#0f172a;
+        -webkit-font-smoothing:antialiased;
+      }
+      .wrap{
+        width:100%;
+        max-width:880px;
+      }
+      .card{
+        background:linear-gradient(180deg, rgba(255,255,255,1), rgba(250,252,255,0.9));
+        border-radius:var(--radius);
+        padding:28px;
+        box-shadow:var(--shadow);
+        border:1px solid rgba(95,108,255,0.06);
+      }
+      header{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+      .logo{
+        width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px
+      }
+      h1{margin:0;font-size:20px}
+      p.lead{margin:4px 0 18px;color:var(--muted)}
+
+      form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+      fieldset{grid-column:1/-1;border:0;padding:0;margin:0}
+      label{display:block;font-size:13px;margin-bottom:6px;color:#0f172a}
+      input[type="text"],input[type="email"],input[type="password"],select{
+        width:100%;padding:10px 12px;border-radius:10px;border:1px solid #e6e9f2;background:transparent;font-size:14px
+      }
+      .full{grid-column:1/-1}
+      .row{display:flex;gap:12px}
+      .controls{display:flex;flex-direction:column;gap:8px}
+      .choices{display:flex;gap:10px;flex-wrap:wrap}
+      .choice input{margin-right:8px}
+      .actions{display:flex;gap:10px;justify-content:flex-end;align-items:center;margin-top:8px}
+      button{background:linear-gradient(90deg,var(--accent),#7ea7ff);border:0;color:white;padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:600}
+      button.reset{background:transparent;color:var(--muted);border:1px solid #eef2ff}
+      small{color:var(--muted)}
+
+      @media (max-width:640px){
+        form{grid-template-columns:1fr}
+        .actions{justify-content:stretch}
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="card" aria-labelledby="signup-title">
+        <header>
+          <div class="logo">PC</div>
+          <div>
+            <h1 id="signup-title">Join Our Course</h1>
+            <p class="lead">Quick sign up — takes less than a minute.</p>
+          </div>
+        </header>
+
+        <form novalidate>
+          <fieldset>
+            <legend class="full"><h2 style="margin:0;font-size:16px">Personal Details</h2></legend>
+
+            <div>
+              <label for="myName">Full name</label>
+              <input class="full" type="text" id="myName" name="name" placeholder="e.g. Amina Khan" required>
+            </div>
+
+            <div>
+              <label for="myEmail">Email address</label>
+              <input type="email" id="myEmail" name="email" placeholder="you@example.com" required>
+            </div>
+
+            <div>
+              <label for="myPassword">Password</label>
+              <input type="password" id="myPassword" name="password" minlength="6" maxlength="12" placeholder="6–12 characters" required>
+              <small>Keep it between 6 and 12 characters.</small>
+            </div>
+
+            <div>
+              <label>Gender</label>
+              <div class="choices" role="radiogroup" aria-label="Gender">
+                <label class="choice"><input type="radio" name="gender" id="m" value="male">Male</label>
+                <label class="choice"><input type="radio" name="gender" id="f" value="female">Female</label>
+                <label class="choice"><input type="radio" name="gender" id="o" value="other">Other</label>
+              </div>
+            </div>
+
+            <div class="full">
+              <label>Which course level would you prefer?</label>
+              <div class="choices">
+                <label class="choice"><input type="checkbox" name="course_level" value="basic">Basic</label>
+                <label class="choice"><input type="checkbox" name="course_level" value="intermediate">Intermediate</label>
+                <label class="choice"><input type="checkbox" name="course_level" value="advanced">Advanced</label>
+              </div>
+            </div>
+
+            <div class="full">
+              <label for="referral">Where did you hear about us?</label>
+              <select id="referral" name="referral" required>
+                <option value="">Choose an option</option>
+                <option value="family">Family</option>
+                <option value="media">Social Media</option>
+                <option value="friends">Friends</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="full actions">
+              <button type="reset" class="reset">Reset</button>
+              <button type="submit">Sign Up</button>
+            </div>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
