@@ -1,0 +1,37 @@
+* {
+  color: rgb(241, 178, 84);
+}
+
+body {
+  background-color: lightgrey;
+  text-align: center;
+}
+
+h1 {
+  color: royalblue;
+  background-color: azure;
+  padding: 40px;
+}
+
+.coloured-purple {
+  color: purple;
+}
+
+.hello {
+  background-color: blanchedalmond;
+  color: aqua;
+  color: brown;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.Colour {
+  color: cadetblue;
+}
+
+#my-card {
+  border: 20px dashed blue;
+  color: brown;
+}

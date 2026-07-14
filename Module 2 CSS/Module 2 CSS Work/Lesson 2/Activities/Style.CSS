@@ -1,0 +1,82 @@
+body {
+  background-color: darkblue;
+  background-image: linear-gradient(45deg, navy, purple);
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.page-header {
+  background-image: linear-gradient(to right, purple, coral);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 16px;
+}
+
+.fact-card {
+  background-color: midnightblue;
+  color: white;
+  border-radius: 12px;
+  padding: 3px;
+  margin-top: 15px;
+  text-align: center;
+}
+.fact-card h2 {
+  color: coral;
+}
+
+.footer-text {
+  text-align: center;
+  background-color: rgb(4, 4, 97);
+  color: white;
+  padding: 2px;
+  border-radius: 100%;
+}
+
+.star {
+  width: 60px;
+  height: 60px;
+  background-color: gold;
+  border-radius: 50%;
+  animation:
+    twinkle 0.5s infinite alternate,
+    simpleBounce 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from {
+    background-color: gold;
+  }
+
+  to {
+    background-color: white;
+  }
+}
+
+
+
+@keyframes simpleBounce{
+  0%,
+  20%,
+  50%,
+  80%,
+  100%
+
+ {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-10px);
+    /* Peak height of first bounce */
+  }
+
+  60% {
+    transform: translateX(-10px);
+    /* Peak height of second smaller bounce */
+  }
+   80% {
+       transform: translateX(10px);
+       /* Peak height of second smaller bounce */
+   }
+}
