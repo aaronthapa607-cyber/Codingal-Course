@@ -1,126 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Food Nutrition Blog</title>
     <style>
-        nav {
-            display: flex;
-            flex-direction: column;
-            padding: 0px;
-        }
-        
-        nav a {
-            color:#000000;
+      nav {
+        display: flex;
+        flex-direction: column;
+        padding: 0px;
+      }
+
+      nav a {
+        color: #000000;
         display: block;
-            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            border: 1px solid rgba(0, 0, 0, 0);
-            padding: 8px 15px;
-            margin: 0;
-            border-radius: 0;
-            transition: all 1s ease;
-            font-size: 16px;
-            font-weight: bold;
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-            box-sizing: border-box;
+        font-family:
+          "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans",
+          Arial, sans-serif;
+        border: 1px solid rgba(0, 0, 0, 0);
+        padding: 8px 15px;
+        margin: 0;
+        border-radius: 0;
+        transition: all 1s ease;
+        font-size: 16px;
+        font-weight: bold;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        box-sizing: border-box;
+      }
+
+      nav a:hover {
+        background-color: beige;
+        color: #160174;
+        transform: scale(1.05);
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+      }
+        hr {
+          border: 0;
+          height: 2px;
+          background-color: #0c37a4;
+          margin: 0.5em 0;
         }
-        
-        nav a:hover {
-            background-color: beige;
-            color: #160174;
-            transform: scale(1.05);
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-        }
+      address {
+  font-style: normal;
+}
+
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div style="background-color: rgb(179, 209, 233); padding: 20px">
-        <h1 style= "text-align:center; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"> DoHealthy: Food Nutrition Blog</h1>
-        </div>
-        
-        <div style="background-color: azure; padding: 5px;">
-            <nav>
-                <b>
-                <a href="#h">Healthy Plate</a>
-                <a href="#n">Nutrition Tips</a>
-                <a href="#q">Quick Note</a>
-                <a href="#v">Video Section</a>
-                <a href="#c">Contact Section</a>
-                <a href="#f">Footer</a>
-                </b>
+      <div style="background-color: rgb(179, 209, 233); padding: 20px">
+        <h1
+          style="
+            text-align: center;
+            font-family:
+              &quot;Trebuchet MS&quot;, &quot;Lucida Sans Unicode&quot;,
+              &quot;Lucida Grande&quot;, &quot;Lucida Sans&quot;, Arial,
+              sans-serif;
+          "
+        >
+          DoHealthy: Food Nutrition Blog
+        </h1>
+      </div>
 
-            </nav>
-        </div>
+      <div style="background-color: azure; padding: 5px">
+        <nav>
+          <a href="#h">Healthy Plate</a>
+          <a href="#n">Nutrition Tips</a>
+          <a href="#q">Quick Note</a>
+          <a href="#v">Video Section</a>
+          <a href="#c">Contact Section</a>
+         
+        </nav>
+      </div>
     </header>
-    <main style="text-align:center;">
-        <section id="h">
-            <h2>Making a Healthy Plate</h2>
-            <hr style="color:#0c37a4">
-        <h3> Healthy Plate Gallery</h3>
-        
-        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin-top:15px;">
-            <figure>
-            <img src="../../../Module 1 HTML Work Assets/Lesson 5/Projects/49699711-3ea0add70b814bf592d9b9e9f78e0d09.jpg"
-                 alt="Healthy plate image"  style="max-width: 100%; height: auto; width: 250px; border-radius: 10px;">
-                
-     <figcaption>A healthy meal containing vegetables and meat.</figcaption>
-                <br>
-            <img src="../../../Module 1 HTML Work Assets/Lesson 5/Projects/healthy-salad.jpg"
-                 alt="Healthy salad plate"
-                 style="max-width: 100%; height: auto; width: 250px; border-radius: 10px;">
-                <figcaption>A very healthy plate that contains a variety of different vegetables and fruits. </figcaption>
-                <br>
-            <img src="../../../Module 1 HTML Work Assets/Lesson 5/Projects/balanced-meal.jpg"
-                 alt="Balanced healthy meal"
-                 style="max-width: 100%; height: auto; width: 250px; border-radius: 10px;">
-                <figcaption>A healthy meal containing vegetables and meat.</figcaption>
+    <main style="text-align: center; background-color: rgb(164, 173, 201); font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+      <section id="h">
+        <hr>
+        <h2>Making a Healthy Plate</h2>
+        <hr style="color: #0c37a4" />
+        <h3>Healthy Plate Gallery</h3>
 
-                </figure>
+        <div
+          style="
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+          "
+        >
+          <figure>
+            <img
+              src="../../../Module 1 HTML Work Assets/Lesson 5/Projects/49699711-3ea0add70b814bf592d9b9e9f78e0d09.jpg"
+              alt="Healthy plate image"
+              style="
+                max-width: 100%;
+                height: auto;
+                width: 250px;
+                border-radius: 10px;
+              "
+            />
+            <figcaption>
+              A healthy meal containing vegetables and meat.
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="../../../Module 1 HTML Work Assets/Lesson 5/Projects/healthy-salad.jpg"
+              alt="Healthy salad plate"
+              style="
+                max-width: 100%;
+                height: auto;
+                width: 250px;
+                border-radius: 10px;
+              "
+            />
+            <figcaption>
+              A very healthy plate that contains a variety of different
+              vegetables and fruits.
+            </figcaption>
+          </figure>
+
+          <figure>
+            <img
+              src="../../../Module 1 HTML Work Assets/Lesson 5/Projects/balanced-meal.jpg"
+              alt="Balanced healthy meal"
+              style="
+                max-width: 100%;
+                height: auto;
+                width: 250px;
+                border-radius: 10px;
+              "
+            />
+            <figcaption>
+              A healthy meal containing vegetables and meat.
+            </figcaption>
+          </figure>
         </div>
         <article>
-        <p>
-    Meals that are healthy contain a good amount (usually 3-5 each) of servings of grain, which gives carbohydrates and can be found in bread and rice, vegetables, which contain minerals and fibres and can be found in food like carrots, and cabbage, dairy, which gives calcium and can be found in milk and cheese, fruits, which give nutrients and can be found in foods like apples and bananas, and lastly lean meat and poultry, which can be found in foods like eggs and steak.
-        </p>
-<br>
-<br>
-        Share a healthy meal of yours here:
-        <br>
-        <p><a href="https://www.eatingwell.com/" alt="EatingWell">EatingWell</a></p>
+          <p>
+            Meals that are healthy contain a good amount (usually 3-5 each) of
+            servings of grain, which gives carbohydrates and can be found in
+            bread and rice, vegetables, which contain minerals and fibres and
+            can be found in food like carrots, and cabbage, dairy, which gives
+            calcium and can be found in milk and cheese, fruits, which give
+            nutrients and can be found in foods like apples and bananas, and
+            lastly lean meat and poultry, which can be found in foods like eggs
+            and steak.
+          </p>
+          <br />
+          <br />
+          Share a healthy meal of yours here:
+          <br />
+          <p>
+            <a href="https://www.eatingwell.com/" alt="EatingWell"
+              >EatingWell</a
+            >
+          </p>
         </article>
-        </section>
-        <br>
-        <br>
-        <section id="n">
-            <h2>Nutritional Tips</h2>
-            
-                <p>
-                    <article>
-                    <h3>Drink water</h3>
-                    Water hydrates your body and it is more healthy compared to other drinks like soft drinks or coffee.
-                    </article>
-                    <article>
-                    <h3>Consistently follow your diet.</h3>
-                   Your path to eating healthy is pointless if you only eat a healthy plate once. A diet requires consistency and discipline. Get yourself motivated!
-<br>
-<br>
-                Learn more about nutrition here:
-                <br>
-                <br>
-                <a href="https://www.who.int/health-topics/nutrition#tab=tab_1" alt="World Health Organisation">World Health Organisation</a>
-</article>
+      </section>
+      
+      <br />
+      <br />
+      <section id="n">
+        <hr>
+        <h2>Nutritional Tips</h2>
+          <hr />
+        <article>
+          <h3>Drink water</h3>
+          Water hydrates your body and it is more healthy compared to other
+          drinks like soft drinks or coffee.
+        </article>
+        <article>
+          <h3>Consistently follow your diet.</h3>
+          Your path to eating healthy is pointless if you only eat a healthy
+          plate once. A diet requires consistency and discipline. Get yourself
+          motivated!
 
-            
-        </section>
-        <section id="q">
+          <br />
+          <br />
+          Learn more about nutrition here:
+          <br />
+          <br />
+          <a
+            href="https://www.who.int/health-topics/nutrition#tab=tab_1"
+            alt="World Health Organisation"
+            >World Health Organisation</a
+          >
+        </article>
+      </section>
+      <br />
+      <br />
+      <section id="q">
+        <aside>
+            <hr>
+          <h2>Quick Note</h2>
+            <hr />
+          <article>
        
-        <h2>  Quick Note
-        </h2>
-        <p>Make sure you are not buying processed foods because they can have unhealthy ingredients. Make sure to check the nutritional label, health star rating and ingredients list to confirm if an item is processed or not.</p>
-        </section>
+
+          <p>
+            Make sure you are not buying processed foods because they can have
+            unhealthy ingredients. Make sure to check the nutritional label,
+            health star rating and ingredients list to confirm if an item is
+            processed or not.
+          </p>
+
+       
+        <br />
+        Learn more about how to determine if a food is processed or not here:
+        <br />
+        <br />
+        <a
+          href="https://www.foodstandards.gov.au/consumer/our-safe-food-supply/processed-foods"
+          >Food Standards Australia New Zealand</a
+        >
+        </article>
+    </aside>
+      </section>
+      <br />
+      <br />
+      <section id="v">
+        <hr>
+        <h2>Nutrition Video</h2>
+          <hr />
+        <article>
+        Here is a video focusing on nutrition, teaching us on how it benefits us
+        and our body and why it matters.
+       
+        <br />
+        <br />
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/Evji_ebWZQU?si=c5BXJH1PesNw_K6o"
+          title="YouTube video player"
+          frameborder="0"
+          allow="
+            accelerometer;
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            gyroscope;
+            picture-in-picture;
+            web-share;
+          "
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+        </article>
+        <hr />
+      </section>
+      
+      <section id="c">
+      <h2>Contact Us</h2>
+    <hr>
+    <p>Have any healthy images or feedback to share? Contact us!</p>
+    <br>
+    <address>
+    <p><b>Email:</b>
+    <a href="mailto:nutritionblog@gmail.com">nutritionblog@gmail.com</a>
+    </p>
+    <p><b>Phone number:</b>
+    <a href="tel:+61412345678">0412345678</a>
+    </p>
+    </address>
+      </section>
+      <hr>
+      <section>
+        <footer>
+        <p> &copy; 2026 DoHealthy: Food Nutrition Blog. All rights reserved.
+            </p>
+            </footer>
+      </section>
+      
+
     </main>
-</body>
+  </body>
 </html>
