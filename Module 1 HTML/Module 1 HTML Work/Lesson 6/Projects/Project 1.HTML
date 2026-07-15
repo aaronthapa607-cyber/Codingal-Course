@@ -1,11 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📚 Book Donation Form</title>
+
+    <style>
+      * {
+        font-family: "Trebuchet MS", sans-serif;
+      }
+      body {
+        background-image: linear-gradient(to bottom, aliceblue, midnightblue);
+        background-repeat: no-repeat;
+        height: 160vh;
+        color: aliceblue;
+      }
+      fieldset {
+        background-color: black;
+        border: 10px solid blue;
+      }
+      legend {
+        color: midnightblue;
+        border: 3px solid;
+        background-color: ghostwhite;
+      }
+      h1 {
+        color: white;
+        background-color: black;
+        padding: 30px;
+        text-align: center;
+        border: 10px blue solid;
+      }
+      button {
+        color: white;
+        background-color: black;
+        border: 2px solid blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>📚 Book Donation Form📚</h1>
+    <form
+      action="http://127.0.0.1:3000/Module%201%20HTML/Module%201%20HTML%20Work/Lesson%206/Projects/thank-you.html?vscode-livepreview=true"
+    >
+      <fieldset>
+        <legend>
+          <b><h2>Donor Details</h2></b>
+        </legend>
+        <label for="myName">Donor Name:</label>
+        <br />
+        <input
+          type="text"
+          name="name"
+          placeholder="Enter your full name"
+          id="myName"
+          required
+        />
+        <br />
+        <br />
+        <label for="myPassword">Donor ID:</label>
+        <br />
+        <input
+          type="password"
+          name="password"
+          id="myPassword"
+          minlength="6"
+          maxlength="12"
+          placeholder="Must be 6-12 characters"
+          required
+        />
+        <br />
+        <br />
+        <label for="BookDonationDate"> Donation Date: </label>
+        <br />
+        <input
+          type="date"
+          name="BookDonationDate"
+          id="BookDonationDate"
+          required
+        />
+      </fieldset>
+      <br />
+      <fieldset>
+        <legend>
+          <h2><b>Book Details</b></h2>
+        </legend>
+        <label for="BookCategory"> Choose Book Category: </label>
+        <br />
+        <select id="BookCategory" name="BookCategory" required>
+          <option value="" hidden>Choose an option</option>
+          <option value="Fic">Fiction</option>
+          <option value="Sci">Science</option>
+          <option value="His">History</option>
+          <option value="Edu">Education</option>
+        </select>
+
+        <br />
+        <br />
+        <label>Book Condition:</label>
+        <br />
+        <input
+          type="radio"
+          value="New"
+          name="Condition"
+          id="Like-New"
+          required
+        />
+        <label for="Like-New">Like New</label>
+        <br />
+        <input type="radio" value="Good" name="Condition" id="Good" />
+        <label for="Good">Good</label>
+        <br />
+        <input type="radio" value="Used" name="Condition" id="Used" />
+        <label for="Used">Used</label>
+
+        <br />
+        <br />
+        <label for="BookNotes"> Additional Notes: </label>
+        <br />
+        <details>
+                    <summary>Click here to view or edit the notes</summary>
+          <textarea name="BookNotes" cols="40" rows="10"
+            placeholder="Write any additional description you want to share about the book. This can include the title of the book, the author or an extra note about the book."></textarea>
+        </details>
+      </fieldset>
+      <br />
+      <br />
+      <fieldset>
+        <legend>
+          <h2><b>Preferred Drop-Off Day</b></h2>
+        </legend>
+        <input type="checkbox" value="Monday" id="Monday" />
+        <label for="Monday">Monday</label>
+        <br />
+        <input type="checkbox" value="Wednesday" id="Wednesday" />
+        <label for="Wednesday">Wednesday</label>
+        <br />
+        <input type="checkbox" value="Friday" id="Friday" />
+        <label for="Friday">Friday</label>
+      </fieldset>
+
+      <br />
+      <button type="submit">Submit Form</button>
+      <button type="reset" style="margin-left: 3%">Reset Form</button>
+    </form>
+  </body>
 </html>
