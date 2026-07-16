@@ -1,0 +1,55 @@
+* {
+    text-decoration: underline;
+    text-overflow: 100px;
+    border: 5px solid rgb(0, 0, 5)
+}
+
+body {
+    background-color: royalblue;
+    text-align: center;
+    color:azure
+}
+
+h1 {
+    color: aqua;
+    border: 20px double rgb(27, 27, 164);
+
+}
+
+.super{
+    background-color: antiquewhite;
+}
+
+.supa{
+    background-color: cadetblue;
+    border: 100px solid;
+    color: aqua;
+    color: brown;
+    color:blue;
+    color:aquamarine
+}
+
+.man{
+    
+    border: none;
+    color:rgb(0, 0, 0);
+    text-decoration: overline;
+   
+    
+    
+
+}
+
+.coloured-purple-hello{
+   all:initial;
+
+}
+
+
+
+#cartoony{
+    border: 20px dotted rgb(58, 126, 81);
+   background-color: aqua;
+   color: rgb(180, 43, 177);
+
+}

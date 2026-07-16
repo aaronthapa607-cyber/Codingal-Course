@@ -1,0 +1,71 @@
+ 
+        /* Typography — font, size, weight, colour for the whole page */
+        body {
+            background-color: darkblue;
+            color: white;
+            font-family: 'Space Grotesk';
+            font-size: 16px;
+
+
+
+        }
+
+.hero-name {
+    background: #05050f;
+    border-radius: 32px;
+    text-align:center;
+    color: #e0f0ff;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 4px;
+    text-shadow:
+        2px 0 3px #00d4ff,
+        -1px 1px 6px #0088ff,
+        0 0 12px rgba(0, 150, 255, 0.3);
+    animation: electric-spark 1s steps(3) infinite;
+            font-weight: 900;
+            font-size: 50px;
+            text-shadow:
+                2px 0 3px #ffae00,
+                -1px 1px 6px #0088ff,
+                0 0 12px rgba(0, 150, 255, 0.3);
+}
+        /* Typography + Text Shadow — big bold title with an orange shadow */
+        
+
+
+        /* Typography + Text Transform — tagline becomes Title Case */
+        .tagline {font-style: italic;
+        text-transform: capitalize;}
+
+
+        /* Text Transform + Text Decoration — section headings in CAPS with underline */
+        .label {
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+
+
+        /* Typography — powers stand out in bold green */
+        .power {
+            font-weight: bold;
+            color: green;
+
+        }
+
+
+        /* Text Decoration — weaknesses are crossed out */
+        .weakness {text-decoration: line-through;
+        color: red}
+
+
+        /* Transform — the badge is tilted to the side */
+        .badge {transform: rotate(6deg);
+        background-color: #0088ff;
+    display: inline-block;}
+
+
+        /* Typography — footer text */
+        .made-by {
+            color: coral;
+            font-style:italic;
+        }
