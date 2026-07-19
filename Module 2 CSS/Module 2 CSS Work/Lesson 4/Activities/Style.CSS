@@ -1,0 +1,100 @@
+body {
+  font-family: Arial;
+  background: #fff8f0;
+  padding: 30px;
+  text-align: center;
+}
+
+h1 {
+  color: #e65c00;
+}
+
+h1+p {
+
+    background: #ffe0b2;
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+
+    color: #bf360c;
+
+    display: inline-block;
+   
+
+}
+/* Sibling Selector - styles the paragraph right after h1 */
+
+ul>li {
+    list-style: none;
+    font-weight: bold;
+  padding: 10px 20px;
+  background-color: #f1cbb1;
+  margin-top: 20px;
+  margin: 6px auto;
+  border-radius: 32px;
+
+}
+
+/* Child Selector - styles only direct li children of ul */
+ul>li:nth-child(3){
+background-color: #e65c00;
+box-shadow: 20px 5px#040200;
+}
+/* nth-child - highlights the 3rd item as Chef's Special */
+
+.desc::first-letter{
+  color: #fcbf09;
+  margin-top: 20px;
+  font-size: 50px;
+  width: 400px;
+  margin: 0 auto;
+  font-weight: 900;
+  text-shadow: #040200 5px 5px;
+  margin-right: 5px;
+
+
+
+}
+
+/* first-letter - makes the first letter big and bold */
+
+.links {
+  margin-top: 25px;
+  padding: 20px 45px;
+  background-color: white;
+  border-radius: 32px;
+  display: inline-block;
+
+
+}
+
+.noice {
+border-right: 1px grey solid ;
+margin-right: 5px;
+
+height: 20px;
+
+
+
+
+}
+
+a {
+padding: 10px;
+background-image: linear-gradient(to right, rgb(187, 187, 239), aliceblue);
+color: white;
+font-weight: 700;
+text-decoration: none;
+border-radius: 25px;
+transition: all 1s linear;
+}
+
+a:hover{
+    transform: scale(1);
+    padding: 16px;
+    background-image: linear-gradient(to right, orange, yellow);
+    color:black
+
+
+}
