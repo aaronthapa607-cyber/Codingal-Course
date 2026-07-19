@@ -24,7 +24,9 @@ h1+p {
 
 }
 /* Sibling Selector - styles the paragraph right after h1 */
-
+ul{
+    padding:0
+}
 ul>li {
     list-style: none;
     font-weight: bold;
