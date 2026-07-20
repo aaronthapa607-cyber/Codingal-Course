@@ -1,0 +1,79 @@
+body {
+    text-align: center;
+  background-color: seagreen;
+  font-family: 'Space Grotesk';
+justify-content: center;
+align-items: center;
+height: 100vh;
+}
+/* Page background — sets the colour and font for the whole page */
+.fact-file{
+    padding: 1rem; 
+    background-image: linear-gradient(45deg, green, lightgreen );
+    border-radius: 32px;
+    border: 5px solid rgb(22, 97, 26);
+    width: 50%;
+    margin:auto;
+    margin-top: 30px;
+    transition: all 0.5s linear;
+}
+
+.fact-file:hover {
+    transform: rotate(10deg);
+
+}
+/* Box Model — width sets the content area
+               padding pushes the text away from the edges
+               border draws a visible frame around the fact file
+               margin pushes the fact file away from the screen edge */
+.animal-name {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 900;
+    font-family: "Oswald";
+    color: forestgreen;
+    font-size: 40px;
+    border-left: 5px double;
+    border-bottom: 5px dotted rgb(38, 236, 38);
+    border-right: 5px dashed yellow;
+    border-top: 5px solid rgb(50, 205, 50);
+   
+}
+
+.image img {
+    margin-top: 10px;
+    width: 100%;
+   
+}
+
+.image {
+    padding: 1rem;
+        background-image: linear-gradient(45deg, green, lightgreen);
+        border-radius: 32px;
+        border: 5px solid rgb(22, 97, 26);
+        width: 50%;
+        margin: auto;
+        margin-top: 50px;
+        transition: all 0.5s linear;
+}
+
+.image:hover {
+    transform: rotate(10deg);
+
+}
+
+/* Animal name — forestgreen so it stands out */
+.detail 
+{
+    color:rgb(1, 28, 15);
+    font-weight: 900;
+    text-shadow: 2px 2px 5px rgb(7, 46, 28);
+
+}
+/* Detail rows — dark text on the light background */
+.cool-fact{
+    color: orange;
+    font-style: italic;
+    font-weight: bolder;
+}
+/* Cool fact — orange and italic to make it feel special */
