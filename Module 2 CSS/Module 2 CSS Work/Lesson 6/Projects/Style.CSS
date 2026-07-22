@@ -1,0 +1,80 @@
+ body {
+     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+     background-color: lightyellow;
+     padding: 65px 30px 30px 30px;
+     height: 2000px;
+ }
+
+ h1,
+ h2 {
+     color: darkorange;
+ }
+
+ .top-bar {
+     background-color: rgb(155, 95, 22);
+     color: white;
+     padding: 14px 20px;
+     position: fixed;
+     top:0px;
+     left:0px;
+     right: 0px;
+     z-index: 1;
+ }
+
+ .list-group {
+    padding: 32px;
+    background-color: white;
+    border: 2px solid darkorange;
+ }
+
+ .list-item {
+     background-color: rgb(253, 175, 107);
+     border: 2px solid darkorange;
+     padding: 10px 20px;
+     margin: 5px 0;
+     margin-bottom: 100px;
+     height: 50px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+
+
+ }
+
+ .special-note {
+     background-color: gold;
+     padding: 10px 20px;
+     position: relative;
+     top:10px;
+     left: -10px;
+ }
+
+ .pet-card {
+     background-color: white;
+     border: 3px solid darkorange;
+     padding: 15px 25px;
+     position: relative;
+ }
+
+ .badge {
+     background-color: forestgreen;
+     color: white;
+     padding: 4px 8px;
+     border-radius: 8px;
+     position:absolute;
+     top: 5px;
+     right: 5px
+
+ }
+
+ .section-label {
+     background-color: darkorange;
+     color: white;
+     padding: 10px 20px;
+     position: sticky;
+     top: 45px;
+     bo
+
+
+ }
