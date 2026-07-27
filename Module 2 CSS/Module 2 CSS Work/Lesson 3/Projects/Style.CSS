@@ -1,0 +1,88 @@
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: rgb(240, 216, 186);
+}
+
+.menu-card {
+    border: 15px solid saddlebrown;
+    border-radius: 32px;
+
+}
+
+h1{
+    text-align: center;
+    font-size: 50px;
+    text-transform: uppercase;
+    text-decoration: underline overline burlywood;
+    letter-spacing: -0.9px;
+  
+
+}
+.head{
+    border: 7px solid;
+   
+    border-radius: 32px;
+    margin:2.5px;
+    background-color: antiquewhite;
+
+
+}
+.tagline{
+text-align: center;
+text-decoration: underline;
+font-style: italic;
+
+}
+
+h2{
+    color:rgb(4, 4, 120);
+    margin-left: 20px;
+    text-decoration: underline;
+   
+
+    
+}
+.menu-section{
+    border: 4px solid rgb(67, 47, 12);
+    border-radius: 32px;
+    background-color: antiquewhite;
+
+}
+
+.dish-desc::first-letter{
+   color: rgb(49, 37, 8);
+   font-size: 25px;
+   font-weight: 900;
+}
+.dish-name{
+    font-weight: bold;
+    transition: all 1s linear
+    
+
+}
+
+.dish-name:hover{
+transform: scale(1.05);
+color: brown;
+text-decoration: underline;
+
+}
+
+.en{
+    margin-left: 20px;
+}
+
+.special-offer{
+    background-color: saddlebrown;
+    text-align: center;
+    transform: rotate(-2deg);
+    font-size: 17px;
+    font-weight: bolder;
+    box-shadow: 1px 3px 3px rgb(57, 2, 2);
+    color:rgb(250, 238, 225);
+    text-shadow: 2px 2px 3px 
+
+    
+    
+    
+}
