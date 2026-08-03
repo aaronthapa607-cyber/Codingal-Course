@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Module 2 - Lesson 4 - Activity 1 - My Food Menu</title>
+    <link rel="stylesheet" href="Style.CSS">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  </head>
+
+ 
+  <body>
+    <header class="page-header">
+      <h1>BlissCream's Ice Cream Menu</h1>
+      <p>Welcome to BlissCream's ice cream menu!
+      
+      </p>
+      <p class="description">
+        We serve flavourful ice cream that satisfies the tongue and brings eternal
+        happiness.
+      </p>
+    </header>
+
+    <main class="flavours">
+      <h2>Today's Ice Cream Flavours</h2>
+
+      <ul class="flavour-grid">
+      <li class="flavour">
+        <span class="emoji">🍫</span>
+        <span class="text">Chocolate</span>
+        <span class="description">Delicious cocoa bliss in every lick.</span>
+        <span class="cost">$4.50</span>
+      </li>
+      <li class="flavour">
+        <span class="emoji">🍦</span>
+        <span class="text">Vanilla</span>
+        <span class="description">A creamy classic that satisfies the tongue.</span>
+        <span class="cost">$3.80</span>
+      </li>
+      <li class="flavour">
+        <span class="emoji">🌿</span>
+        <span class="text">Mint & Caramel - Menu's Special!</span>
+        <span class="description">A refreshing mint base swirled with rich caramel.</span>
+        <span class="cost">$5.20</span>
+      </li>
+      <li class="flavour">
+        <span class="emoji">🍪</span>
+        <span class="text">Cookies and Cream</span>
+        <span class="description">Creamy vanilla loaded with crunchy cookie bits.</span>
+        <span class="cost">$4.90</span>
+      </li>
+    </ul>
+
+      <div class="thanks">
+        <button onclick="openAlert()">Order Now</button>
+      </div>
+    </main>
+
+    <dialog id="orderDialog">
+      <h2>Thank you for ordering on BlissCream!</h2>
+      <p>
+        We appreciate your order and hope you enjoy your delicious ice cream!
+      </p>
+      <button onclick="closeAlert()"><div class="Yes">Close</div></button>
+    </dialog>
+
+    <dialog id="warningDialog">
+      <h2>Please choose a flavour</h2>
+      <p>Select one ice cream flavour before placing your order.</p>
+      <button onclick="closeWarning()">OK</button>
+    </dialog>
+
+    <script>
+      // I used help from external sources to make this script.
+      const dialog = document.getElementById("orderDialog");
+      const warningDialog = document.getElementById("warningDialog");
+      const allFlavours = Array.from(document.querySelectorAll('.flavour'));
+      let selectedFlavour = null;
+
+      function openAlert() {
+        if (!selectedFlavour) {
+          warningDialog.showModal();
+          return;
+        }
+
+        dialog.showModal();
+        clearSelection();
+      }
+
+      function closeAlert() {
+        dialog.close();
+      }
+
+      function closeWarning() {
+        warningDialog.close();
+      }
+
+      function clearSelection() {
+        allFlavours.forEach(flavour => flavour.classList.remove('clicked'));
+        selectedFlavour = null;
+      }
+
+      allFlavours.forEach(flavour => {
+        flavour.addEventListener('click', function() {
+          if (selectedFlavour === this) {
+            this.classList.remove('clicked');
+            selectedFlavour = null;
+            return;
+          }
+
+          allFlavours.forEach(item => item.classList.remove('clicked'));
+          this.classList.add('clicked');
+          selectedFlavour = this;
+        });
+      });
+    </script>
+
+  </body>
+</html>

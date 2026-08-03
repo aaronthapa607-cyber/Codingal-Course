@@ -1,0 +1,27 @@
+body {
+    background-color: aliceblue;
+}
+
+.flavour {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 16px;
+    background-color: rgb(244, 226, 201);
+    border: 2px solid green;
+    margin: 5px;
+    
+}
+
+.flavour-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    list-style: none;
+    max-width: 500px;
+    margin: 0 auto;
+}
