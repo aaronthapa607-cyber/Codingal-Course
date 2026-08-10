@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Starlight Festival</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-image: linear-gradient(45deg, rgb(2, 66, 2), rgb(5, 55, 5));
+        color: #f7f3e9;
+        font-family: "Inter", sans-serif;
+        min-height: 100vh;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .container {
+        text-align: center;
+      }
+
+      .row {
+        justify-content: center;
+      }
+
+      .hero,
+      .card-glass,
+      pre,
+      .blockquote {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .card-glass,
+      .blockquote,
+      pre {
+        text-align: center;
+      }
+
+      .hero {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 28px;
+        backdrop-filter: blur(10px);
+        padding: 32px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      }
+
+      .hero h1 {
+        color: #ffd75a;
+        text-shadow: 0 2px 18px rgba(255, 204, 0, 0.25);
+      }
+
+      .hero p {
+        color: #d8e3cc;
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      .display-1,
+      .display-2,
+      .display-3,
+      .display-4 {
+        background-color: rgba(255, 255, 255, 0.12);
+        padding: 18px 14px;
+        border-radius: 18px;
+        display: inline-block;
+      }
+
+      .section-title {
+        color: #ffe7b6;
+        letter-spacing: 0.06em;
+      }
+
+      .level-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 180px;
+        height: 80px;
+        border-radius: 24px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 199, 83, 0.18),
+          rgba(255, 255, 255, 0.08)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: #fff;
+        font-weight: 700;
+      }
+
+      dl dt {
+        color: #ffd75a;
+        font-weight: 700;
+      }
+
+      dl dd {
+        margin-bottom: 18px;
+        color: #d8e3cc;
+      }
+
+      mark {
+        background: #ffd75a;
+        color: #0d1a12;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-weight: 600;
+      }
+
+      code {
+        background: rgba(255, 255, 255, 0.08);
+        color: #b2f9b2;
+        padding: 4px 8px;
+        border-radius: 8px;
+        font-family: "Courier New", Courier, monospace;
+      }
+
+      abbr {
+        color: #ffd75a;
+        text-decoration: none;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+        cursor: help;
+      }
+
+      pre {
+        background: rgba(255, 255, 255, 0.06);
+        color: #cbe7c7;
+        padding: 18px;
+        border-radius: 18px;
+        display: inline-block;
+        text-align: left;
+        max-width: 100%;
+        overflow-x: auto;
+      }
+
+      .blockquote {
+        border-left: 4px solid #ffd75a;
+        padding-left: 18px;
+        color: #e7e1d3;
+        font-style: italic;
+      }
+
+      .card-glass {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      }
+
+      .card-glass h5 {
+        color: #ffd75a;
+      }
+
+      hr {
+        border-color: rgba(255, 255, 255, 0.14);
+      }
+      small {
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="hero text-center mb-5">
+        <h1>Starlight Festival</h1>
+        <p class="lead mt-3">
+          Explore the new show zones, collect your fan passes, and enjoy the
+          evening lineup.
+        </p>
+      </div>
+
+      <section class="mb-5">
+        <h2 class="section-title mb-4">Experience Zones</h2>
+        <div class="row g-3 justify-content-center">
+          <div class="col-12 col-md-3 text-center">
+            <p class="display-1">Pavilion One</p>
+          </div>
+          <div class="col-12 col-md-3 text-center">
+            <p class="display-2">Glow Garden</p>
+          </div>
+          <div class="col-12 col-md-3 text-center">
+            <p class="display-3">Rhythm Plaza</p>
+          </div>
+          <div class="col-12 col-md-3 text-center">
+            <p class="display-4">Night Market</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-5">
+        <h2 class="section-title mb-4">Guest Passes</h2>
+        <div class="row g-4">
+          <div class="col-12 col-md-4">
+            <div class="card card-glass p-4 h-100">
+              <h5 class="mb-2">Aaron</h5>
+              <p class="mb-0"><small>Pass: Pavilion One</small></p>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card card-glass p-4 h-100">
+              <h5 class="mb-2">Mahad</h5>
+              <p class="mb-0"><small>Pass: Glow Garden</small></p>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card card-glass p-4 h-100">
+              <h5 class="mb-2">Venkata</h5>
+              <p class="mb-0"><small>Pass: Rhythm Plaza</small></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-5">
+        <h2 class="section-title mb-4">Event Guide</h2>
+        <div class="row g-4 justify-content-center">
+          <div class="col-12 col-md-8">
+            <dl class="mb-0">
+              <dt>Skyline Ride</dt>
+              <dd>
+                A gentle lift viewing the lights from above while music plays.
+              </dd>
+              <dt>Lantern Walk</dt>
+              <dd>
+                A calm route lined with glowing lanterns and live storytellers.
+              </dd>
+              <dt>Water Beat</dt>
+              <dd>
+                A splash show synced to energetic tunes and bright colors.
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-5">
+        <h2 class="section-title mb-4">Safety Notes</h2>
+        <p>
+          Every guest should check in at <mark>Welcome Point</mark> before
+          heading into the festival.
+        </p>
+        <p>
+          Hold on to your belongings near the <mark>Fountain Stage</mark> after
+          10pm.
+        </p>
+      </section>
+
+      <section class="mb-5">
+        <h2 class="section-title mb-4">Action Commands</h2>
+        <p>Start the ride: <code>stage.start("Skyline Ride")</code></p>
+        <p>Light the path: <code>lantern.ignite("Lantern Walk")</code></p>
+        <p>Pause the show: <code>water.pause("Water Beat")</code></p>
+      </section>
+
+      <section class="mb-5">
+        <h2 class="section-title mb-4">Team Labels</h2>
+        <p>
+          <abbr title="Festival Support Crew">FSC</abbr> checks each zone before
+          doors open.
+        </p>
+        <p>
+          <abbr title="Evening Safety Unit">ESU</abbr> watches the main stage
+          areas.
+        </p>
+        <p>
+          <abbr title="Guest Welcome Guides">GWG</abbr> greets everyone at the
+          entrance.
+        </p>
+      </section>
+
+      <section class="mb-5 text-center">
+        <h2 class="section-title mb-4">Agenda</h2>
+        <pre>
+06:00 PM - Guest Arrival
+07:00 PM - Skyline Ride
+08:00 PM - Lantern Walk
+09:30 PM - Water Beat
+10:30 PM - Final Parade
+        </pre>
+      </section>
+
+      <section class="mb-5">
+        <h2 class="section-title mb-4">Festival Quote</h2>
+        <blockquote class="blockquote">
+          <p>"A night of lights begins with one step into the crowd."</p>
+          <footer class="blockquote-footer text-white-50">
+            Starlight Festival Crew
+          </footer>
+        </blockquote>
+      </section>
+    </div>
+  </body>
+</html>

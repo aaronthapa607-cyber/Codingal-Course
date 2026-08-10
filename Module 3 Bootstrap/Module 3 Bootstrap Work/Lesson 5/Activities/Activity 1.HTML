@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>My Ocean World</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+
+    <style>
+      body {
+        background-color: #1b1994;
+        color: rgb(235, 194, 235);
+        padding: 15px;
+        font-family: "Inter", sans-serif;
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 255, 255, 0.12),
+            transparent 18%
+          ),
+          radial-gradient(
+            circle at 80% 15%,
+            rgba(255, 255, 255, 0.08),
+            transparent 15%
+          ),
+          radial-gradient(
+            circle at 50% 80%,
+            rgba(255, 255, 255, 0.06),
+            transparent 14%
+          );
+        pointer-events: none;
+      }
+
+      .navbar {
+        background-color: #772cf1;
+        border-radius: 18px;
+        padding: 18px 20px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      .navbar-brand,
+      .nav-link {
+        color: #fff !important;
+      }
+
+      .navbar-nav {
+        display: flex;
+        gap: 1.2rem;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+      }
+
+      .nav-item {
+        list-style: none;
+      }
+
+      .hero {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 22px;
+        padding: 24px;
+        margin-bottom: 28px;
+      }
+
+      h4 {
+        margin: 20px 0 10px;
+        color: #f0d7ff;
+      }
+
+      .spinner-border {
+        color: #d9a1ff;
+      }
+
+      
+
+
+      .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+      }
+
+      .card-img-top {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+   \
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .page-footer {
+        margin-top: 30px;
+      }
+
+      .emoji {
+        font-size: 3rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand justify-content-between">
+      <!-- TOPIC 3: NAVIGATION BAR -->
+      <a class="navbar-brand d-flex align-items-center"
+        ><span class="emoji">🌍</span> Planet Explorer</a
+      >
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link">Home</a></li>
+        <li class="nav-item"><a class="nav-link">Planets</a></li>
+        <li class="nav-item"><a class="nav-link">Stars</a></li>
+      </ul>
+    </nav>
+
+    <div class="container mt-4">
+      <!-- TOPIC 1: SPINNERS -->
+      <div>
+        <h4 class="">
+          <span class="spinner-border"></span> Scanning the Galaxy...
+        </h4>
+      </div>
+
+      <!-- TOPIC 2: CARDS -->
+      <h4 class="">Featured Planets</h4>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="../../../Module 3 Bootstrap Work Assets/Lesson 5/Activities/neptune.png"
+              class="card-img-top"
+              alt="Neptune"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Neptune</h5>
+              <p class="card-text">This striking blue planet has 14 moons.</p>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="../../../Module 3 Bootstrap Work Assets/Lesson 5/Activities/earth.png"
+              class="card-img-top"
+              alt="Earth"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Earth</h5>
+              <p class="card-text">
+                The only planet in our solar system with life.
+              </p>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="../../../Module 3 Bootstrap Work Assets/Lesson 5/Activities/uranus.png"
+              class="card-img-top"
+              alt="Uranus"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Uranus</h5>
+              <p class="card-text">
+                This planet has an extreme axial tilt of 98 degrees, meaning it
+                is almost completely spinning on its side.
+              </p>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOPIC 4: PAGINATION -->
+      <h4>Browse More Planets</h4>
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link">Previous</a></li>
+        <li class="page-item"><a class="page-link active">1</a></li>
+        <li class="page-item"><a class="page-link">2</a></li>
+        <li class="page-item"><a class="page-link">3</a></li>
+        <li class="page-item"><a class="page-link">Next</a></li>
+      </ul>
+    </div>
+  </body>
+</html>
