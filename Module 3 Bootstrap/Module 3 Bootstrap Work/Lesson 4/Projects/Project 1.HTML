@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width='/', initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <style>
+      .btn.active {
+        border-width: 2px !important;
+        border-style: solid !important;
+      }
+      .btn-primary.active { border-color: #0d6efd !important; }
+      .btn-danger.active { border-color: #dc3545 !important; }
+      .btn-success.active { border-color: #198754 !important; }
+      .btn-warning.active { border-color: #ffc107 !important; }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid bg-primary-subtle">
+      <div class="container p-4">
+        <h1>My Study Projects Dashboard</h1>
+        <p class="lead h6">
+          <small>
+            Welcome to my study progress dashboard. Here we have the progress of the subjects I am learning and the number of projects completed for each one.</small>
+        </p>
+        <button type="button" class="btn btn-primary mb-3 me-3" data-subject="math">Math</button>
+        <button type="button" class="btn btn-danger mb-3 me-3" data-subject="coding">Coding</button>
+        <button type="button" class="btn btn-success mb-3 me-3" data-subject="science">Science</button>
+        <button type="button" class="btn btn-warning mb-3" data-subject="english">English</button>
+      </div>
+    </div>
+    <div class="container p-4">
+      <h1>
+        Experiments Completed
+        <div class="badge text-bg-danger">4</div>
+      </h1>
+      <p>
+        <b
+          >Maths <span class="badge text-bg-primary">1 project</span></b
+        >
+      </p>
+      <p>
+        <b>Coding <span class="badge text-bg-danger">3 projects</span></b>
+      </p>
+      <p>
+        <b>Science <span class="badge text-bg-success">4 projects</span></b>
+      </p>
+      <p>
+        <b>English <span class="badge text-bg-warning">7 projects</span></b>
+      </p>
+    </div>
+    <hr class="text-primary">
+    <div class="p-4">
+      <h1>Study Progress</h1>
+      <p class="fw-bold">Math</p>
+      <div class="progress mb-3" role="progressbar">
+        <div class="progress-bar" style="width: 90%">90%</div>
+      </div>
+       <p class="fw-bold">Biology</p>
+      <div class="progress mb-3" role="progressbar">
+        <div class="progress-bar text-bg-danger" style="width: 70%">70%</div>
+      </div>
+     <p class="fw-bold">Physics</p>
+      <div class="progress mb-3" role="progressbar">
+        <div class="progress-bar text-bg-success" style="width: 40%">40%</div>
+      </div>
+     <p class="fw-bold">Astronomy</p>
+      <div class="progress mb-3" role="progressbar">
+        <div class="progress-bar text-bg-warning" style="width: 30%">30%</div>
+      </div>
+    
+    
+    </div>
+    <script>
+      const subjectButtons = document.querySelectorAll('button[data-subject]');
+      subjectButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          subjectButtons.forEach((btn) => btn.classList.remove('active'));
+          button.classList.add('active');
+        });
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>

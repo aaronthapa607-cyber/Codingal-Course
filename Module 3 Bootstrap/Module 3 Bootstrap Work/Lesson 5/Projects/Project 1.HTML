@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>My Ocean World</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+
+    <style>
+      :root {
+        --ocean-deep: #031d33;
+        --ocean-mid: #0a476a;
+        --ocean-bright: #1bc7d6;
+        --ocean-sky: #dffbff;
+        --ocean-foam: #f3feff;
+        --ocean-glow: rgba(255, 255, 255, 0.12);
+        --ocean-shadow: rgba(0, 0, 0, 0.28);
+      }
+
+      body {
+        background: linear-gradient(
+          180deg,
+          #031d33 0%,
+          #0a3e5f 45%,
+          #0a2941 100%
+        );
+        color: var(--ocean-sky);
+        padding: 15px;
+        font-family: "Inter", sans-serif;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 255, 255, 0.12),
+            transparent 18%
+          ),
+          radial-gradient(
+            circle at 80% 15%,
+            rgba(255, 255, 255, 0.08),
+            transparent 15%
+          ),
+          radial-gradient(
+            circle at 50% 80%,
+            rgba(146, 228, 255, 0.1),
+            transparent 14%
+          );
+        pointer-events: none;
+      }
+
+      .navbar {
+        background: linear-gradient(135deg, #0b6ca9, #0a4c75);
+        border-radius: 18px;
+        padding: 18px 22px;
+        box-shadow: 0 18px 40px var(--ocean-shadow);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .navbar-brand,
+      .nav-link {
+        color: #f2fdff !important;
+        font-weight: 600;
+      }
+
+      .navbar-brand {
+        letter-spacing: 0.03em;
+      }
+
+      .navbar-nav {
+        display: flex;
+        gap: 1.2rem;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+      }
+
+      .nav-item {
+        list-style: none;
+      }
+
+      .nav-link {
+        opacity: 0.95;
+      }
+
+      .hero {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 22px;
+        padding: 26px 24px;
+        margin-bottom: 28px;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      }
+
+      .hero h2 {
+        color: var(--ocean-foam);
+        font-weight: 700;
+      }
+
+      .hero p {
+        color: #dceefb;
+        margin: 0;
+      }
+
+      .subheading {
+        color: #7fe8ff;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-size: 0.75rem;
+        margin-bottom: 0.8rem;
+      }
+
+      h4 {
+        margin: 20px 0 14px;
+        color: #e8fdff;
+        font-weight: 700;
+      }
+
+      .spinner-border {
+        color: #88ecff;
+        width: 2.2rem;
+        height: 2.2rem;
+      }
+
+      .row {
+        --bs-gutter-x: 2rem;
+        --bs-gutter-y: 2rem;
+      }
+
+      .card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background: rgba(14, 52, 79, 0.7);
+        border: 1px solid rgba(143, 223, 255, 0.18);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+      }
+
+      .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+        padding: 1rem 1rem 1.1rem;
+      }
+
+      .card-title {
+        color: #ebfdff;
+        font-weight: 700;
+      }
+
+      .card-text {
+        color: #d7efff;
+        line-height: 1.6;
+      }
+
+      .card-img-top {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #1ecae6, #1189d5);
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        color: #fff;
+      }
+
+      .btn-primary:hover,
+      .btn-primary:focus {
+        background: linear-gradient(135deg, #30d9f1, #0c7ad9);
+        border: none;
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .pagination {
+        margin-top: 8px;
+      }
+
+      .page-link {
+        background: rgba(159, 234, 255, 0.08);
+        border-color: rgba(159, 234, 255, 0.2);
+        color: #defbff;
+        border-radius: 8px;
+        margin-right: 0.4rem;
+      }
+
+      .page-item.active .page-link {
+        background: linear-gradient(135deg, #1ecae6, #1189d5);
+        border-color: #1ecae6;
+        color: #fff;
+      }
+
+      .page-link:hover {
+        background: rgba(159, 234, 255, 0.16);
+        color: #fff;
+      }
+
+      .emoji {
+        font-size: 2.5rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand justify-content-between">
+      <a class="navbar-brand d-flex align-items-center" href="#"
+        ><span class="emoji">🌊</span> Ocean Explorer</a
+      >
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Reefs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Currents</a></li>
+      </ul>
+    </nav>
+
+    <div class="container mt-4">
+      <div class="hero">
+        <p class="subheading">Deep Sea Discovery</p>
+        <h2>Explore the hidden wonders beneath the waves</h2>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <span class="spinner-border"></span>
+        <h4 class="mb-0">Scanning the Ocean Depths...</h4>
+      </div>
+
+      <h4>Unique Ocean Animals</h4>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="../../../Module 3 Bootstrap Work Assets/Lesson 5/Projects/dolphin.png"
+              class="card-img-top"
+              alt="Dolphin"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Dolphin</h5>
+              <p class="card-text">
+                Dolphins are playful, intelligent sea mammals that leap through
+                the surf.
+              </p>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="../../../Module 3 Bootstrap Work Assets/Lesson 5/Projects/shark.png"
+              class="card-img-top"
+              alt="Shark"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Shark</h5>
+              <p class="card-text">
+                Sharks are powerful ocean predators with incredible senses and
+                speed.
+              </p>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="../../../Module 3 Bootstrap Work Assets/Lesson 5/Projects/goldfish.jpg"
+              class="card-img-top"
+              alt="Goldfish"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Goldfish</h5>
+              <p class="card-text">
+                Goldfish are bright, graceful fish known for their glowing
+                colors and calm movement.
+              </p>
+              <button class="btn btn-primary">Learn More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4>Browse More Ocean Animals</h4>
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </div>
+  </body>
+</html>
