@@ -1,0 +1,33 @@
+<html>
+  <body>
+    <h1>Lesson 3 Activity 1</h1>
+    <ol id="fruits-list">
+
+    </ol>
+    <script>
+      let name = "aaRon thaPA";
+      document.write(name.toUpperCase())
+      document.write("<br>")
+
+      let upperCaseName = name.toUpperCase()
+   document.write(upperCaseName.startsWith("A"))
+      document.write("<br>")
+          document.write(name.includes("Ron"));
+          document.write("<br>")
+        
+       let lower = 0
+       let upper = 60000000000000000
+       let randomNumber = lower + Math.floor(Math.random()* upper)
+       document.write(randomNumber)
+
+       let fruits = ["Apple", "Banana", "Tomato", "Grapes"]
+       let text = "";
+      
+       for (let i = 1; i < fruits.length; i++) 
+       {text = text +`<li>${fruits[i]}</li>`};
+       document.getElementById("fruits-list").innerHTML = text
+       console.log(fruits[3])
+       document.write(`<p>${name}</p>`)
+    </script>
+  </body>
+</html>

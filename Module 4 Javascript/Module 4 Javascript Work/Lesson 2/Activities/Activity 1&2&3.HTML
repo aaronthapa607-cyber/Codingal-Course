@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="result"></p>
+    <button onclick="intro(`o`, `o`)">Greetings</button>
+    <br>
+    <br>
+    <button onclick="add(212**2313123213123123,513245235353253525234**24859082109458)">Add</button>
+    <script>
+       function add(a, b) {
+         let sum = a + b;
+         document.getElementById("result").innerHTML = sum;
+       }
+      
+    
+      function intro(name, preference) {
+        document.getElementById("result").innerHTML = (`My name is ${name} and I like ${preference}.<br>`);
+      }
+      intro("Aaron", "math");
+      intro("Sam", "comic books");
+  
+
+      function hi() {
+        document.getElementById("result").innerHTML = "Hello there!";
+      }
+
+      
+    </script>
+  </body>
+</html>
