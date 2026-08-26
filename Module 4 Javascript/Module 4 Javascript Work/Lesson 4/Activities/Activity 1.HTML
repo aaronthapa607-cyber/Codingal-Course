@@ -1,5 +1,100 @@
-<html>
-  <body>
-    <h1>Lesson 4 Activity 1</h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Phone Contact</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f0f0f2;
+      }
+      h1 {
+        color: #ff5a43;
+      }
+      .card-label {
+        font-size: 11px;
+        color: #999;
+        text-transform: uppercase;
+      }
+      pre {
+        font-size: 13px;
+        color: #333;
+      }
+      .card {
+        max-width: 400px;
+      }
+      .card-title,
+      h6 {
+        color: #ff5a43;
+      }
+    </style>
+  </head>
+  <body class="py-4">
+    <div class="container">
+      <h1 class="mb-1">My Phone Contact</h1>
+      <p class="text-muted mb-4">Introduction to Objects in JavaScript</p>
+
+      <!-- Contact Card -->
+      <div class="card shadow-sm mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Contact Details</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div class="card-label">Name</div>
+              <strong id="name"></strong>
+            </li>
+            <li class="list-group-item">
+              <div class="card-label">Age</div>
+              <strong id="age"></strong>
+            </li>
+            <li class="list-group-item">
+              <div class="card-label">School</div>
+              <strong id="school"></strong>
+            </li>
+            <li class="list-group-item">
+              <div class="card-label">City</div>
+              <strong id="city"></strong>
+            </li>
+
+            <li class="list-group-item">
+              <div class="card-label">Favourite Colour</div>
+              <strong id="favouritecolour"></strong>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Code Box -->
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h6>JavaScript Object Used</h6>
+          <pre id="objectDisplay" class="bg-light p-3 rounded border"></pre>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let contact = {
+        name: "Venatingoding",
+        age: "67",
+        school: "Gulugulu High School",
+        city: "Top City",
+        favouritecolour: "E",
+      };
+
+      document.getElementById("name").innerHTML = contact.name;
+      document.getElementById("age").innerHTML = contact.age;
+      document.getElementById("school").innerHTML = contact.school;
+      document.getElementById("city").innerHTML = contact.city;
+      document.getElementById("favouritecolour").innerHTML =
+        contact["favouritecolour"];
+    contact.name = "101010101"
+        document.getElementById("objectDisplay").innerHTML = JSON.stringify(contact)
+
+    
+    </script>
   </body>
 </html>
