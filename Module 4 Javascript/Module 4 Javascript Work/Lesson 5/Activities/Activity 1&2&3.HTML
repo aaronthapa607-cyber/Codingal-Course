@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apple Escape</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(#0f172a, #111827);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .controls {
+        margin-bottom: 20px;
+        display: flex;
+        gap: 12px;
+      }
+
+      button {
+        padding: 12px 18px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        background: #7dd3fc;
+        color: #082f49;
+      }
+
+      #scoreBoard {
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #facc15;
+      }
+
+      #gameArea {
+        position: relative;
+        width: 420px;
+        height: 300px;
+        border: 4px solid #38bdf8;
+        border-radius: 12px;
+        background: linear-gradient(#0b1120, #111827);
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+      }
+
+      #player,
+      #monster,
+      #boss,
+      .apple {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+      }
+
+      #player {
+        background: #22c55e;
+        box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+      }
+
+      #monster {
+        background: #ef4444;
+        box-shadow: 0 0 12px rgba(239, 68, 68, 0.8);
+      }
+
+      #boss {
+        background: #a855f7;
+        width: 36px;
+        height: 36px;
+        box-shadow: 0 0 16px rgba(168, 85, 247, 0.9);
+        display: none;
+      }
+
+      .apple {
+        background: #ef4444;
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.9);
+      }
+
+      .apple::before {
+        content: "";
+        position: absolute;
+        width: 6px;
+        height: 18px;
+        background: green;
+        left: 9px;
+        top: -12px;
+        border-radius: 3px;
+      }
+
+      #status {
+        margin-top: 16px;
+        font-size: 18px;
+        min-height: 28px;
+        text-align: center;
+      }
+
+      #gameOverScreen {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.75);
+        text-align: center;
+        z-index: 10;
+      }
+
+      #gameOverBox {
+        background: rgba(15, 23, 42, 0.95);
+        border: 2px solid #f87171;
+        border-radius: 12px;
+        padding: 24px 30px;
+        box-shadow: 0 0 20px rgba(248, 113, 113, 0.4);
+      }
+
+      #gameOverText {
+        font-size: 30px;
+        font-weight: bold;
+        color: #fca5a5;
+        margin-bottom: 10px;
+      }
+
+      #gameOverSubText {
+        color: #e2e8f0;
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <button id="combined" type="button">Reset</button>
+      <button id="PressMe" type="button">Start</button>
+    </div>
+
+    <div id="scoreBoard">Apples: 0</div>
+
+    <div id="gameArea">
+      <div id="gameOverScreen">
+        <div id="gameOverBox">
+          <div id="gameOverText">GAME OVER</div>
+          <div id="gameOverSubText">Press Reset to play again</div>
+        </div>
+      </div>
+      <div id="player"></div>
+      <div id="monster"></div>
+      <div id="boss"></div>
+    </div>
+
+    <div id="status">
+      Press Start. Collect apples, avoid the monster, and survive!
+    </div>
+
+    <script>
+      const player = document.getElementById("player");
+      const monster = document.getElementById("monster");
+      const boss = document.getElementById("boss");
+      const status = document.getElementById("status");
+      const scoreBoard = document.getElementById("scoreBoard");
+      const gameOverScreen = document.getElementById("gameOverScreen");
+      const gameArea = document.getElementById("gameArea");
+      const startButton = document.getElementById("PressMe");
+      const resetButton = document.getElementById("combined");
+
+      let playerX = 25;
+      let playerY = 220;
+      let monsterX = 330;
+      let monsterY = 30;
+      let bossX = 320;
+      let bossY = 120;
+      let apples = [];
+      let score = 0;
+      let bossLevel = false;
+      let gameStarted = false;
+      let gameOver = false;
+      let moveLeft = false;
+      let moveRight = false;
+      let moveUp = false;
+      let moveDown = false;
+
+      function updateScore() {
+        scoreBoard.textContent = `Apples: ${score}`;
+      }
+
+      function showGameOver(message) {
+        gameOver = true;
+        gameStarted = false;
+        gameOverScreen.style.display = "flex";
+        document.getElementById("gameOverText").textContent = message;
+        document.getElementById("gameOverSubText").textContent =
+          "Press Reset to play again";
+        status.textContent = "You were caught!";
+      }
+
+      function spawnApple() {
+        if (apples.length > 0) {
+          apples[0].remove();
+          apples = [];
+        }
+
+        const apple = document.createElement("div");
+        apple.className = "apple";
+
+        const x = Math.random() * (gameArea.clientWidth - 24);
+        const y = Math.random() * (gameArea.clientHeight - 24);
+
+        apple.style.left = x + "px";
+        apple.style.top = y + "px";
+        apple.dataset.x = String(x);
+        apple.dataset.y = String(y);
+
+        gameArea.appendChild(apple);
+        apples.push(apple);
+      }
+
+      function updateStatusText() {
+        if (gameOver) return;
+        if (bossLevel) {
+          status.textContent = `Apples: ${score} | Boss fight!`;
+        } else {
+          status.textContent = `Apples: ${score} | Keep collecting!`;
+        }
+      }
+
+      function updatePositions() {
+        player.style.left = playerX + "px";
+        player.style.top = playerY + "px";
+        monster.style.left = monsterX + "px";
+        monster.style.top = monsterY + "px";
+        boss.style.left = bossX + "px";
+        boss.style.top = bossY + "px";
+      }
+
+      function resetGame() {
+        playerX = 25;
+        playerY = 220;
+        monsterX = 330;
+        monsterY = 30;
+        bossX = 320;
+        bossY = 120;
+        score = 0;
+        bossLevel = false;
+        gameStarted = false;
+        gameOver = false;
+        moveLeft = false;
+        moveRight = false;
+        moveUp = false;
+        moveDown = false;
+
+        apples.forEach((apple) => apple.remove());
+        apples = [];
+        spawnApple();
+
+        boss.style.display = "none";
+        gameOverScreen.style.display = "none";
+        status.textContent =
+          "Press Start. Collect apples, avoid the monster, and survive!";
+        startButton.textContent = "Start";
+        updateScore();
+        updatePositions();
+      }
+
+      function collectApples() {
+        if (apples.length === 0 || gameOver) return;
+
+        const apple = apples[0];
+        const appleX = Number(apple.dataset.x) + 12;
+        const appleY = Number(apple.dataset.y) + 12;
+        const playerCenterX = playerX + 12;
+        const playerCenterY = playerY + 12;
+        const distance = Math.hypot(
+          playerCenterX - appleX,
+          playerCenterY - appleY,
+        );
+
+        if (distance < 20) {
+          score += 1;
+          apple.remove();
+          apples = [];
+          if (!gameOver) {
+            spawnApple();
+          }
+          updateScore();
+          updateStatusText();
+
+          if (score >= 20) {
+            bossLevel = true;
+            boss.style.display = "block";
+            status.textContent =
+              "Boss fight! The purple monster is chasing you!";
+          }
+        }
+      }
+
+      function moveMonster() {
+        if (gameOver) return;
+
+        const dx = playerX - monsterX;
+        const dy = playerY - monsterY;
+        const distance = Math.hypot(dx, dy) || 1;
+        const speed = 2.2 + score * 0.15 + (bossLevel ? 1.1 : 0);
+
+        monsterX += (dx / distance) * speed;
+        monsterY += (dy / distance) * speed;
+
+        monsterX = Math.max(0, Math.min(gameArea.clientWidth - 24, monsterX));
+        monsterY = Math.max(0, Math.min(gameArea.clientHeight - 24, monsterY));
+
+        updatePositions();
+
+        if (Math.hypot(playerX - monsterX, playerY - monsterY) < 24) {
+          showGameOver("GAME OVER");
+        }
+      }
+
+      function moveBoss() {
+        if (!bossLevel || gameOver) return;
+
+        const dx = playerX - bossX;
+        const dy = playerY - bossY;
+        const distance = Math.hypot(dx, dy) || 1;
+        const speed = 2.9 + score * 0.12;
+
+        bossX += (dx / distance) * speed;
+        bossY += (dy / distance) * speed;
+
+        bossX = Math.max(0, Math.min(gameArea.clientWidth - 36, bossX));
+        bossY = Math.max(0, Math.min(gameArea.clientHeight - 36, bossY));
+
+        updatePositions();
+
+        if (Math.hypot(playerX - bossX, playerY - bossY) < 30) {
+          showGameOver("BOSS WINS");
+        }
+      }
+
+      function movePlayer() {
+        if (!gameStarted || gameOver) return;
+
+        if (moveLeft) playerX -= 5;
+        if (moveRight) playerX += 5;
+        if (moveUp) playerY -= 5;
+        if (moveDown) playerY += 5;
+
+        playerX = Math.max(0, Math.min(gameArea.clientWidth - 24, playerX));
+        playerY = Math.max(0, Math.min(gameArea.clientHeight - 24, playerY));
+
+        collectApples();
+        updatePositions();
+        moveMonster();
+        moveBoss();
+      }
+
+      document.addEventListener("keydown", (event) => {
+        const key = event.key;
+        if (key === "ArrowLeft") moveLeft = true;
+        if (key === "ArrowRight") moveRight = true;
+        if (key === "ArrowUp") moveUp = true;
+        if (key === "ArrowDown") moveDown = true;
+      });
+
+      document.addEventListener("keyup", (event) => {
+        const key = event.key;
+        if (key === "ArrowLeft") moveLeft = false;
+        if (key === "ArrowRight") moveRight = false;
+        if (key === "ArrowUp") moveUp = false;
+        if (key === "ArrowDown") moveDown = false;
+      });
+
+      startButton.addEventListener("click", () => {
+        if (!gameStarted && !gameOver) {
+          gameStarted = true;
+          gameOverScreen.style.display = "none";
+          status.textContent = "Run and collect apples!";
+          startButton.textContent = "Running";
+        }
+      });
+
+      resetButton.addEventListener("click", resetGame);
+
+      setInterval(() => {
+        movePlayer();
+      }, 16);
+
+      resetGame();
+    </script>
+  </body>
+</html>
