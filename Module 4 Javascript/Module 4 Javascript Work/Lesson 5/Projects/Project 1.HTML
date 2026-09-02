@@ -1,5 +1,186 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tinu's Profile</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+      }
+      .card {
+        border: 1px solid #ccc;
+        padding: 15px;
+        border-radius: 8px;
+        max-width: 300px;
+      }
+      h2 {
+        margin-top: 0;
+        color: #333;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      .color-dot {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 8px;
+        vertical-align: middle;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
   <body>
-    <h1>Lesson 5 Project 1</h1>
+    <!-- HTML container where the data will be displayed -->
+    <div id="profile-container"></div>
+
+    <script>
+      const colorPalette = [
+        { name: "Red", value: "#FF0000" },
+        { name: "Coral", value: "#FF7F50" },
+        { name: "Tomato", value: "#FF6347" },
+        { name: "Salmon", value: "#FA8072" },
+        { name: "Orange", value: "#FFA500" },
+        { name: "DarkOrange", value: "#FF8C00" },
+        { name: "Gold", value: "#FFD700" },
+        { name: "Yellow", value: "#FFFF00" },
+        { name: "Khaki", value: "#F0E68C" },
+        { name: "Olive", value: "#808000" },
+        { name: "Lime", value: "#00FF00" },
+        { name: "Green", value: "#008000" },
+        { name: "SpringGreen", value: "#00FF7F" },
+        { name: "SeaGreen", value: "#2E8B57" },
+        { name: "Teal", value: "#008080" },
+        { name: "Aqua", value: "#00FFFF" },
+        { name: "Cyan", value: "#00FFFF" },
+        { name: "SkyBlue", value: "#87CEEB" },
+        { name: "Blue", value: "#0000FF" },
+        { name: "Navy", value: "#000080" },
+        { name: "Indigo", value: "#4B0082" },
+        { name: "Purple", value: "#800080" },
+        { name: "Violet", value: "#EE82EE" },
+        { name: "Magenta", value: "#FF00FF" },
+        { name: "Fuchsia", value: "#FF00FF" },
+        { name: "Pink", value: "#FFC0CB" },
+        { name: "DeepPink", value: "#FF1493" },
+        { name: "HotPink", value: "#FF69B4" },
+        { name: "Maroon", value: "#800000" },
+        { name: "Brown", value: "#A52A2A" },
+        { name: "Chocolate", value: "#D2691E" },
+        { name: "SaddleBrown", value: "#8B4513" },
+        { name: "Peru", value: "#CD853F" },
+        { name: "Tan", value: "#D2B48C" },
+        { name: "BurlyWood", value: "#DEB887" },
+        { name: "Wheat", value: "#F5DEB3" },
+        { name: "Beige", value: "#F5F5DC" },
+        { name: "Moccasin", value: "#FFE4B5" },
+        { name: "Ivory", value: "#FFFFF0" },
+        { name: "White", value: "#FFFFFF" },
+        { name: "Black", value: "#000000" },
+        { name: "Gray", value: "#808080" },
+        { name: "Silver", value: "#C0C0C0" },
+        { name: "LightGray", value: "#D3D3D3" },
+        { name: "DarkGray", value: "#A9A9A9" },
+        { name: "SlateGray", value: "#708090" },
+        { name: "RoyalBlue", value: "#4169E1" },
+        { name: "DodgerBlue", value: "#1E90FF" },
+        { name: "DeepSkyBlue", value: "#00BFFF" },
+        { name: "LightSkyBlue", value: "#87CEFA" },
+        { name: "Turquoise", value: "#40E0D0" },
+        { name: "MediumTurquoise", value: "#48D1CC" },
+        { name: "CadetBlue", value: "#5F9EA0" },
+        { name: "CornflowerBlue", value: "#6495ED" },
+        { name: "MediumPurple", value: "#9370DB" },
+        { name: "Orchid", value: "#DA70D6" },
+        { name: "Plum", value: "#DDA0DD" },
+        { name: "MediumVioletRed", value: "#C71585" },
+        { name: "DarkRed", value: "#8B0000" },
+        { name: "DarkSalmon", value: "#E9967A" },
+        { name: "LightCoral", value: "#F08080" },
+        { name: "SandyBrown", value: "#F4A460" },
+        { name: "DarkGoldenRod", value: "#B8860B" },
+        { name: "PaleGoldenRod", value: "#EEE8AA" },
+        { name: "LawnGreen", value: "#7CFC00" },
+        { name: "Chartreuse", value: "#7FFF00" },
+        { name: "ForestGreen", value: "#228B22" },
+        { name: "DarkGreen", value: "#006400" },
+        { name: "MediumAquamarine", value: "#66CDAA" },
+        { name: "DarkCyan", value: "#008B8B" },
+        { name: "DarkTurquoise", value: "#00CED1" },
+        { name: "SteelBlue", value: "#4682B4" },
+        { name: "MediumBlue", value: "#0000CD" },
+        { name: "DarkBlue", value: "#00008B" },
+        { name: "DarkViolet", value: "#9400D3" },
+        { name: "DarkMagenta", value: "#8B008B" },
+        { name: "DarkOrchid", value: "#9932CC" },
+        { name: "BlueViolet", value: "#8A2BE2" },
+        { name: "PaleVioletRed", value: "#DB7093" },
+        { name: "LightPink", value: "#FFB6C1" },
+        { name: "MistyRose", value: "#FFE4E1" },
+        { name: "Lavender", value: "#E6E6FA" },
+        { name: "Thistle", value: "#D8BFD8" },
+        { name: "LavenderBlush", value: "#FFF0F5" },
+        { name: "GhostWhite", value: "#F8F8FF" },
+        { name: "Snow", value: "#FFFAFA" },
+        { name: "HoneyDew", value: "#F0FFF0" },
+        { name: "MintCream", value: "#F5FFFA" },
+        { name: "Azure", value: "#F0FFFF" },
+        { name: "AliceBlue", value: "#F0F8FF" },
+        { name: "PowderBlue", value: "#B0E0E6" },
+        { name: "LightSteelBlue", value: "#B0C4DE" },
+        { name: "Gainsboro", value: "#DCDCDC" },
+        { name: "DimGray", value: "#696969" },
+        { name: "DarkSlateGray", value: "#2F4F4F" },
+        { name: "LightSeaGreen", value: "#20B2AA" },
+        { name: "MediumSlateBlue", value: "#7B68EE" },
+        { name: "SlateBlue", value: "#6A5ACD" },
+        { name: "DarkSlateBlue", value: "#483D8B" },
+        { name: "MidnightBlue", value: "#191970" },
+      ];
+
+      function pickRandomColors(palette, count) {
+        const shuffled = [...palette].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, count);
+      }
+
+      // 1. Function that accepts the profile object as an argument
+      function displayProfile(userProfile) {
+        const container = document.getElementById("profile-container");
+
+        // Building the HTML layout using object properties and the array
+        let htmlContent = `
+                <div class="card">
+                    <h2>${userProfile.name}'s Profile</h2>
+                    <p><strong>Age:</strong> ${userProfile.age}</p>
+                    <p><strong>Favorite Colors:</strong></p>
+                    <ul>
+            `;
+
+        // Looping through the array elements
+        userProfile.favColors.forEach(function (color) {
+          htmlContent += `<li><span class="color-dot" style="background: ${color.value};"></span>${color.name}</li>`;
+        });
+
+        htmlContent += `
+                    </ul>
+                </div>
+            `;
+
+        // Injecting the final HTML structure into the page
+        container.innerHTML = htmlContent;
+      }
+
+      const tinuObject = {
+        name: "Tinu",
+        age: 12,
+        favColors: pickRandomColors(colorPalette, 3),
+      };
+
+      displayProfile(tinuObject);
+    </script>
   </body>
 </html>

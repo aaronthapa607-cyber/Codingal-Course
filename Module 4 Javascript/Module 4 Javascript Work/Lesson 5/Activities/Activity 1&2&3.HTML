@@ -84,7 +84,21 @@
         box-shadow: 0 0 10px rgba(239, 68, 68, 0.9);
       }
 
-      .apple::before {
+      .rainbow-apple {
+        background: linear-gradient(
+          135deg,
+          #ff4d4d,
+          #ffb703,
+          #3ae374,
+          #00c2ff,
+          #8c7dff,
+          #ff4ecb
+        );
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+      }
+
+      .apple::before,
+      .rainbow-apple::before {
         content: "";
         position: absolute;
         width: 6px;
@@ -173,20 +187,60 @@
       let playerY = 220;
       let monsterX = 330;
       let monsterY = 30;
-      let bossX = 320;
-      let bossY = 120;
       let apples = [];
       let score = 0;
+      let redSpeedScore = 0;
       let bossLevel = false;
       let gameStarted = false;
       let gameOver = false;
+      let hp = 3;
+      let projectiles = [];
+      let bombs = [];
+      let healingPellets = [];
+      let fists = [];
+      let bones = [];
+      let swords = [];
+      let expertLoop = null;
       let moveLeft = false;
       let moveRight = false;
       let moveUp = false;
       let moveDown = false;
+      let playerSpeed = 5;
+      let swirlAngle = 0;
+      let lastHealingSpawn = 0;
+      let invincibleUntil = 0;
+      let lastFistSpawn = 0;
+      let lastBoneSpawn = 0;
+      let lastSwordSpawn = 0;
+      let expertAttackTimer = 0;
 
       function updateScore() {
-        scoreBoard.textContent = `Apples: ${score}`;
+        scoreBoard.textContent = `Apples: ${score} | HP: ${hp}`;
+      }
+
+      function damagePlayer(amount) {
+        if (gameOver) return;
+
+        if (bossLevel && Date.now() < invincibleUntil) {
+          return;
+        }
+
+        const finalDamage = bossLevel ? 5 : amount;
+        hp -= finalDamage;
+
+        if (bossLevel) {
+          invincibleUntil = Date.now() + 2000;
+        }
+
+        if (hp <= 0) {
+          hp = 0;
+          showGameOver("BULLET HELL");
+        } else {
+          status.textContent = bossLevel
+            ? `EXPERT MODE! HP: ${hp} | Invincible 2s`
+            : `HP: ${hp}`;
+          updateScore();
+        }
       }
 
       function showGameOver(message) {
@@ -206,7 +260,8 @@
         }
 
         const apple = document.createElement("div");
-        apple.className = "apple";
+        const isRainbow = Math.random() < 0.25;
+        apple.className = isRainbow ? "apple rainbow-apple" : "apple";
 
         const x = Math.random() * (gameArea.clientWidth - 24);
         const y = Math.random() * (gameArea.clientHeight - 24);
@@ -215,6 +270,7 @@
         apple.style.top = y + "px";
         apple.dataset.x = String(x);
         apple.dataset.y = String(y);
+        apple.dataset.type = isRainbow ? "rainbow" : "normal";
 
         gameArea.appendChild(apple);
         apples.push(apple);
@@ -223,7 +279,7 @@
       function updateStatusText() {
         if (gameOver) return;
         if (bossLevel) {
-          status.textContent = `Apples: ${score} | Boss fight!`;
+          status.textContent = `EXPERT MODE! Apples: ${score} | HP: ${hp}`;
         } else {
           status.textContent = `Apples: ${score} | Keep collecting!`;
         }
@@ -234,30 +290,50 @@
         player.style.top = playerY + "px";
         monster.style.left = monsterX + "px";
         monster.style.top = monsterY + "px";
-        boss.style.left = bossX + "px";
-        boss.style.top = bossY + "px";
       }
 
       function resetGame() {
+        if (expertLoop) {
+          clearInterval(expertLoop);
+          expertLoop = null;
+        }
+
         playerX = 25;
         playerY = 220;
         monsterX = 330;
         monsterY = 30;
-        bossX = 320;
-        bossY = 120;
         score = 0;
+        redSpeedScore = 0;
         bossLevel = false;
         gameStarted = false;
         gameOver = false;
+        hp = 3;
+        playerSpeed = 5;
+        projectiles = [];
+        bombs = [];
+        healingPellets = [];
+        fists = [];
+        bones = [];
+        swords = [];
+        swirlAngle = 0;
+        lastHealingSpawn = 0;
+        invincibleUntil = 0;
+        lastFistSpawn = 0;
+        lastBoneSpawn = 0;
+        lastSwordSpawn = 0;
+        expertAttackTimer = 0;
         moveLeft = false;
         moveRight = false;
         moveUp = false;
         moveDown = false;
 
-        apples.forEach((apple) => apple.remove());
+        document
+          .querySelectorAll(".apple, .bomb, .bullet, .heal")
+          .forEach((item) => item.remove());
         apples = [];
         spawnApple();
 
+        monster.style.display = "block";
         boss.style.display = "none";
         gameOverScreen.style.display = "none";
         status.textContent =
@@ -281,7 +357,15 @@
         );
 
         if (distance < 20) {
-          score += 1;
+          const points = apple.dataset.type === "rainbow" ? 2 : 1;
+          score += points;
+
+          if (apple.dataset.type === "normal") {
+            redSpeedScore += 1;
+          } else {
+            playerSpeed = Math.min(9, playerSpeed + 1);
+          }
+
           apple.remove();
           apples = [];
           if (!gameOver) {
@@ -290,22 +374,38 @@
           updateScore();
           updateStatusText();
 
-          if (score >= 20) {
+          if (score >= 10) {
             bossLevel = true;
-            boss.style.display = "block";
+            hp = 100;
+            monster.style.display = "none";
+            boss.style.display = "none";
             status.textContent =
-              "Boss fight! The purple monster is chasing you!";
+              "EXPERT MODE: no apples, heavy split-screen pressure!";
+            updateScore();
+            if (!expertLoop) {
+              expertLoop = setInterval(() => {
+                spawnSplitBomb(-1);
+                spawnSplitBomb(0);
+                spawnSplitBomb(1);
+                spawnSplitBomb(-1);
+                spawnSplitBomb(1);
+                if (Date.now() - lastHealingSpawn > 8000) {
+                  spawnHealingPellet();
+                  lastHealingSpawn = Date.now();
+                }
+              }, 380);
+            }
           }
         }
       }
 
       function moveMonster() {
-        if (gameOver) return;
+        if (gameOver || bossLevel) return;
 
         const dx = playerX - monsterX;
         const dy = playerY - monsterY;
         const distance = Math.hypot(dx, dy) || 1;
-        const speed = 2.2 + score * 0.15 + (bossLevel ? 1.1 : 0);
+        const speed = 2.2 + redSpeedScore * 0.15;
 
         monsterX += (dx / distance) * speed;
         monsterY += (dy / distance) * speed;
@@ -320,34 +420,423 @@
         }
       }
 
-      function moveBoss() {
+      function spawnHealingPellet() {
+        const heal = document.createElement("div");
+        heal.className = "heal";
+        heal.style.position = "absolute";
+        heal.style.width = "12px";
+        heal.style.height = "12px";
+        heal.style.borderRadius = "50%";
+        heal.style.background = "#4ade80";
+        heal.style.boxShadow = "0 0 12px rgba(74, 222, 128, 0.9)";
+
+        const x = 40 + Math.random() * (gameArea.clientWidth - 80);
+        const y = 40 + Math.random() * (gameArea.clientHeight - 80);
+
+        heal.style.left = x + "px";
+        heal.style.top = y + "px";
+        gameArea.appendChild(heal);
+
+        healingPellets.push({
+          el: heal,
+          x,
+          y,
+          radius: 6,
+        });
+      }
+
+      function spawnSplitBomb(direction) {
+        const bomb = document.createElement("div");
+        bomb.className = "bomb";
+        bomb.style.position = "absolute";
+        bomb.style.width = "14px";
+        bomb.style.height = "14px";
+        bomb.style.borderRadius = "50%";
+        bomb.style.background = "#fbbf24";
+        bomb.style.boxShadow = "0 0 12px rgba(251, 191, 36, 0.9)";
+
+        const laneX =
+          direction === -1
+            ? 70
+            : direction === 0
+              ? gameArea.clientWidth / 2
+              : gameArea.clientWidth - 70;
+
+        const x = laneX + Math.sin(swirlAngle * 2 + direction) * 25;
+        const y = -14;
+
+        bomb.style.left = x + "px";
+        bomb.style.top = y + "px";
+        gameArea.appendChild(bomb);
+
+        const dx = playerX + 12 - x;
+        const dy = playerY + 12 - y;
+        const dist = Math.hypot(dx, dy) || 1;
+        const speed = 1.8 + Math.random() * 0.7;
+
+        bombs.push({
+          el: bomb,
+          x,
+          y,
+          vx: (dx / dist) * speed * 0.45,
+          vy: 2.2 + Math.random() * 0.9,
+          radius: 7,
+          life: 0,
+          direction,
+          drift: (Math.random() - 0.5) * 1.3,
+          type: "split",
+        });
+      }
+
+      function spawnSplitWave() {
+        spawnSplitBomb(-1);
+        spawnSplitBomb(0);
+        spawnSplitBomb(1);
+      }
+
+      function spawnFist() {
+        const fist = document.createElement("div");
+        fist.className = "fist";
+        fist.style.position = "absolute";
+        fist.style.width = "26px";
+        fist.style.height = "22px";
+        fist.style.borderRadius = "8px";
+        fist.style.background = "#fca5a5";
+        fist.style.boxShadow = "0 0 14px rgba(252, 165, 165, 0.8)";
+
+        const x = 30 + Math.random() * (gameArea.clientWidth - 60);
+        const y = -30;
+        fist.style.left = x + "px";
+        fist.style.top = y + "px";
+        gameArea.appendChild(fist);
+
+        fists.push({
+          el: fist,
+          x,
+          y,
+          vy: 3.6,
+          radius: 12,
+          life: 0,
+        });
+      }
+
+      function spawnBoneWall() {
+        const side = Math.random() < 0.5 ? -1 : 1;
+        const y = 40 + Math.random() * (gameArea.clientHeight - 120);
+        const bone = document.createElement("div");
+        bone.className = "bone";
+        bone.style.position = "absolute";
+        bone.style.width = "40px";
+        bone.style.height = "10px";
+        bone.style.borderRadius = "999px";
+        bone.style.background = "#f8fafc";
+        bone.style.boxShadow = "0 0 10px rgba(255,255,255,0.75)";
+        bone.style.left =
+          side < 0 ? -50 + "px" : gameArea.clientWidth + 10 + "px";
+        bone.style.top = y + "px";
+        gameArea.appendChild(bone);
+
+        bones.push({
+          el: bone,
+          x: side < 0 ? -50 : gameArea.clientWidth + 10,
+          y,
+          vx: side * (5.2 + Math.random() * 2),
+          radius: 18,
+          life: 0,
+        });
+      }
+
+      function spawnSwordSlash() {
+        const slash = document.createElement("div");
+        slash.className = "sword";
+        slash.style.position = "absolute";
+        slash.style.width = "70px";
+        slash.style.height = "10px";
+        slash.style.borderRadius = "999px";
+        slash.style.background =
+          "linear-gradient(90deg, #fca5a5, #f8fafc, #f87171)";
+        slash.style.boxShadow = "0 0 12px rgba(248, 113, 113, 0.9)";
+
+        const side = Math.random() < 0.5 ? -1 : 1;
+        const x = side < 0 ? -70 : gameArea.clientWidth + 70;
+        const y = 30 + Math.random() * (gameArea.clientHeight - 60);
+        slash.style.left = x + "px";
+        slash.style.top = y + "px";
+        gameArea.appendChild(slash);
+
+        swords.push({
+          el: slash,
+          x,
+          y,
+          vx: side * (15 + Math.random() * 4),
+          radius: 28,
+          life: 0,
+        });
+      }
+
+      function explodeBomb(bomb) {
+        bomb.el.remove();
+
+        for (let i = 0; i < 5; i++) {
+          const angle = (Math.PI * 2 * i) / 5 + (Math.random() - 0.5) * 0.8;
+          const bullet = document.createElement("div");
+          bullet.className = "bullet";
+          bullet.style.position = "absolute";
+          bullet.style.width = "8px";
+          bullet.style.height = "8px";
+          bullet.style.borderRadius = "50%";
+          bullet.style.background = "#f97316";
+          bullet.style.boxShadow = "0 0 10px rgba(249, 115, 22, 0.8)";
+          bullet.style.left = bomb.x + "px";
+          bullet.style.top = bomb.y + "px";
+          gameArea.appendChild(bullet);
+
+          projectiles.push({
+            el: bullet,
+            x: bomb.x,
+            y: bomb.y,
+            vx: Math.cos(angle) * (3 + score * 0.04),
+            vy: Math.sin(angle) * (3 + score * 0.04),
+            radius: 4,
+            life: 0,
+            type: "burst",
+          });
+        }
+      }
+
+      function updateExpertProjectiles() {
         if (!bossLevel || gameOver) return;
 
-        const dx = playerX - bossX;
-        const dy = playerY - bossY;
-        const distance = Math.hypot(dx, dy) || 1;
-        const speed = 2.9 + score * 0.12;
-
-        bossX += (dx / distance) * speed;
-        bossY += (dy / distance) * speed;
-
-        bossX = Math.max(0, Math.min(gameArea.clientWidth - 36, bossX));
-        bossY = Math.max(0, Math.min(gameArea.clientHeight - 36, bossY));
-
-        updatePositions();
-
-        if (Math.hypot(playerX - bossX, playerY - bossY) < 30) {
-          showGameOver("BOSS WINS");
+        if (apples.length > 0) {
+          apples[0].remove();
+          apples = [];
         }
+
+        const now = Date.now();
+        expertAttackTimer += 16;
+
+        if (expertAttackTimer >= 5000) {
+          expertAttackTimer = 0;
+          spawnSplitWave();
+        }
+
+        if (now - lastFistSpawn > 2200) {
+          spawnFist();
+          lastFistSpawn = now;
+        }
+
+        if (now - lastBoneSpawn > 1500) {
+          spawnBoneWall();
+          lastBoneSpawn = now;
+        }
+
+        if (now - lastSwordSpawn > 1100) {
+          spawnSwordSlash();
+          lastSwordSpawn = now;
+        }
+
+        if (bombs.length > 25) {
+          const extras = bombs.splice(0, bombs.length - 25);
+          extras.forEach((bomb) => bomb.el.remove());
+        }
+
+        if (projectiles.length > 90) {
+          const extras = projectiles.splice(0, projectiles.length - 90);
+          extras.forEach((proj) => proj.el.remove());
+        }
+
+        if (fists.length > 25) {
+          const extras = fists.splice(0, fists.length - 25);
+          extras.forEach((fist) => fist.el.remove());
+        }
+
+        if (bones.length > 25) {
+          const extras = bones.splice(0, bones.length - 25);
+          extras.forEach((bone) => bone.el.remove());
+        }
+
+        if (swords.length > 25) {
+          const extras = swords.splice(0, swords.length - 25);
+          extras.forEach((sword) => sword.el.remove());
+        }
+
+        swirlAngle += 0.12;
+
+        bombs = bombs.filter((bomb) => {
+          bomb.life += 1;
+          const spreadX =
+            Math.sin(swirlAngle * 2 + bomb.life * 0.25 + bomb.direction) * 18;
+          bomb.x += bomb.vx + spreadX * 0.09;
+          bomb.y += bomb.vy;
+          bomb.el.style.left = bomb.x + "px";
+          bomb.el.style.top = bomb.y + "px";
+
+          const hitPlayer =
+            Math.hypot(playerX + 12 - bomb.x, playerY + 12 - bomb.y) < 16;
+          if (hitPlayer) {
+            explodeBomb(bomb);
+            damagePlayer(20);
+            return false;
+          }
+
+          if (bomb.y > gameArea.clientHeight + 20 || bomb.life > 120) {
+            explodeBomb(bomb);
+            return false;
+          }
+
+          return true;
+        });
+
+        projectiles = projectiles.filter((proj) => {
+          proj.life += 1;
+          proj.x += proj.vx;
+          proj.y += proj.vy;
+          proj.el.style.left = proj.x + "px";
+          proj.el.style.top = proj.y + "px";
+
+          if (proj.x <= 0 || proj.x >= gameArea.clientWidth - proj.radius) {
+            proj.vx *= -1;
+          }
+          if (proj.y <= 0 || proj.y >= gameArea.clientHeight - proj.radius) {
+            proj.vy *= -1;
+          }
+
+          const hitPlayer =
+            Math.hypot(playerX + 12 - proj.x, playerY + 12 - proj.y) < 16;
+          if (hitPlayer) {
+            proj.el.remove();
+            damagePlayer(20);
+            return false;
+          }
+
+          if (
+            proj.life > 140 ||
+            proj.x < -20 ||
+            proj.x > gameArea.clientWidth + 20 ||
+            proj.y < -20 ||
+            proj.y > gameArea.clientHeight + 20
+          ) {
+            proj.el.remove();
+            return false;
+          }
+
+          return true;
+        });
+
+        fists = fists.filter((fist) => {
+          fist.life += 1;
+          fist.y += fist.vy;
+          fist.el.style.left = fist.x + "px";
+          fist.el.style.top = fist.y + "px";
+
+          const hitPlayer =
+            Math.hypot(playerX + 12 - fist.x, playerY + 12 - fist.y) < 18;
+          if (hitPlayer) {
+            fist.el.remove();
+            damagePlayer(20);
+            return false;
+          }
+
+          if (fist.y > gameArea.clientHeight + 30 || fist.life > 210) {
+            fist.el.remove();
+            return false;
+          }
+
+          return true;
+        });
+
+        bones = bones.filter((bone) => {
+          bone.life += 1;
+          bone.x += bone.vx;
+          bone.el.style.left = bone.x + "px";
+          bone.el.style.top = bone.y + "px";
+
+          const hitPlayer =
+            Math.hypot(playerX + 12 - bone.x, playerY + 12 - bone.y) < 18;
+          if (hitPlayer) {
+            bone.el.remove();
+            damagePlayer(20);
+            return false;
+          }
+
+          if (
+            bone.x < -100 ||
+            bone.x > gameArea.clientWidth + 100 ||
+            bone.life > 220
+          ) {
+            bone.el.remove();
+            return false;
+          }
+
+          return true;
+        });
+
+        swords = swords.filter((sword) => {
+          sword.life += 1;
+          sword.x += sword.vx;
+          sword.el.style.left = sword.x + "px";
+          sword.el.style.top = sword.y + "px";
+
+          const hitPlayer =
+            Math.hypot(playerX + 12 - sword.x, playerY + 12 - sword.y) < 20;
+          if (hitPlayer) {
+            sword.el.remove();
+            damagePlayer(20);
+            return false;
+          }
+
+          if (
+            sword.x < -120 ||
+            sword.x > gameArea.clientWidth + 120 ||
+            sword.life > 130
+          ) {
+            sword.el.remove();
+            return false;
+          }
+
+          return true;
+        });
+
+        healingPellets = healingPellets.filter((heal) => {
+          const hitPlayer =
+            Math.hypot(playerX + 12 - heal.x, playerY + 12 - heal.y) < 18;
+
+          if (hitPlayer) {
+            if (bossLevel && Date.now() < invincibleUntil) {
+              return true;
+            }
+
+            heal.el.remove();
+            hp = Math.min(100, hp + 25);
+            status.textContent = `EXPERT MODE! HP: ${hp}`;
+            updateScore();
+            return false;
+          }
+
+          return true;
+        });
+      }
+
+      function updatePlayerVisual() {
+        if (!bossLevel || Date.now() >= invincibleUntil) {
+          player.style.opacity = "1";
+          player.style.boxShadow = "0 0 12px rgba(34, 197, 94, 0.8)";
+          return;
+        }
+
+        const flicker = Math.floor(Date.now() / 100) % 2 === 0 ? 0.35 : 1;
+        player.style.opacity = String(flicker);
+        player.style.boxShadow = "0 0 18px rgba(125, 211, 252, 1)";
       }
 
       function movePlayer() {
         if (!gameStarted || gameOver) return;
 
-        if (moveLeft) playerX -= 5;
-        if (moveRight) playerX += 5;
-        if (moveUp) playerY -= 5;
-        if (moveDown) playerY += 5;
+        const moveAmount = playerSpeed;
+        if (moveLeft) playerX -= moveAmount;
+        if (moveRight) playerX += moveAmount;
+        if (moveUp) playerY -= moveAmount;
+        if (moveDown) playerY += moveAmount;
 
         playerX = Math.max(0, Math.min(gameArea.clientWidth - 24, playerX));
         playerY = Math.max(0, Math.min(gameArea.clientHeight - 24, playerY));
@@ -355,7 +844,8 @@
         collectApples();
         updatePositions();
         moveMonster();
-        moveBoss();
+        updateExpertProjectiles();
+        updatePlayerVisual();
       }
 
       document.addEventListener("keydown", (event) => {
