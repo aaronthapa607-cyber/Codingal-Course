@@ -1,5 +1,60 @@
 <html>
   <body>
     <h1>Lesson 2 Project 1</h1>
+
+    <label>
+      Operation:
+      <select id="operation">
+        <option value="add">Add</option>
+        <option value="subtract">Subtract</option>
+        <option value="multiply">Multiply</option>
+        <option value="divide">Divide</option>
+      </select>
+    </label>
+    <br />
+    <label>First number: <input id="number1" type="number" /></label>
+    <br />
+    <label>Second number: <input id="number2" type="number" /></label>
+    <br />
+    <button onclick="showResult()">Calculate</button>
+    <p id="result"></p>
+
+    <script>
+      function MathOperate(number1, number2, operation) {
+        if (number1 === undefined || number2 === undefined) {
+          alert("Please add two numbers.");
+          return;
+        }
+
+        if (operation === "subtract") {
+          return number1 - number2;
+        }
+        if (operation === "multiply") {
+          return number1 * number2;
+        }
+        if (operation === "divide") {
+          return number1 / number2;
+        }
+        return number1 + number2;
+      }
+
+      function showResult() {
+        const firstNumber = document.getElementById("number1").value;
+        const secondNumber = document.getElementById("number2").value;
+        const operation = document.getElementById("operation").value;
+        const result = document.getElementById("result");
+
+        if (firstNumber === "" || secondNumber === "") {
+          result.textContent = "Please add two numbers.";
+          return;
+        }
+
+        result.textContent = MathOperate(
+          Number(firstNumber),
+          Number(secondNumber),
+          operation
+        );
+      }
+    </script>
   </body>
 </html>

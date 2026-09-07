@@ -1,5 +1,68 @@
 <html>
   <body>
-    <h1>Lesson 3 Project 1</h1>
+    <h1>The Absolutely Random Website</h1>
+    <p>Today's date is: <span id="date"></span></p>
+
+    <script>
+      const date = new Date();
+      const month = date.getMonth();
+      let monthText = "";
+
+      switch (month) {
+        case 0:
+          monthText = "01";
+          break;
+        case 1:
+          monthText = "02";
+          break;
+        case 2:
+          monthText = "03";
+          break;
+        case 3:
+          monthText = "04";
+          break;
+        case 4:
+          monthText = "05";
+          break;
+        case 5:
+          monthText = "06";
+          break;
+        case 6:
+          monthText = "07";
+          break;
+        case 7:
+          monthText = "08";
+          break;
+        case 8:
+          monthText = "09";
+          break;
+        case 9:
+          monthText = "10";
+          break;
+        case 10:
+          monthText = "11";
+          break;
+        case 11:
+          monthText = "12";
+          break;
+        default:
+          monthText = "00";
+      }
+
+      const day = String(date.getDate()).padStart(2, "0");
+      const year = date.getFullYear();
+
+      document.getElementById("date").textContent =
+        `${day}/${monthText}/${year}`;
+      document.write("Here's a random value from 1 - 1000: " + Math.floor(Math.random(1) * 1000 + 1));
+      let number = "";
+      for (let i = 1; i < 11; i++) {
+        const size = i * 12;
+        number += `<p style="font-size:${size}px; font-weight:bold; text-decoration:underline;">WOW ${i}</p>`;
+      }
+
+      document.write(number);
+
+    </script>
   </body>
 </html>
