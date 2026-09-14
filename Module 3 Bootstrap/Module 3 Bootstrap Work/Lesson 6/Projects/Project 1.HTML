@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Jungle Explorer</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .journey-slide {
+        height: 200px;
+        text-align: center;
+        padding-top: 75px;
+        font-size: 1.8rem;
+        color: white;
+      }
+
+      .slide-rainforest {
+        background: darkgreen;
+      }
+
+      .slide-riverine {
+        background: steelblue;
+      }
+
+      .slide-moonwalk {
+        background: rgb(44, 2, 61);
+      }
+
+      .section {
+        padding: 70px 20px;
+        min-height: 300px;
+      }
+
+      .nav-link.active {
+        border-bottom: 2px solid #fff;
+      }
+
+      #rainforest {
+        background: rgb(233, 253, 233);
+        height: 700px;
+      }
+
+      #riverine {
+        background: rgb(236, 244, 252);
+        height: 700px;
+      }
+
+      #moonwalk {
+        background: rgb(251, 244, 255);
+        height: 700px;
+      }
+
+      .nav-link.active {
+        border-bottom: 2px solid #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- TOPIC 1, 2, 3: CAROUSEL -->
+    <div id="journeyCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#journeyCarousel"
+          data-bs-slide-to="0"
+          class="active"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#journeyCarousel"
+          data-bs-slide-to="1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#journeyCarousel"
+          data-bs-slide-to="2"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active journey-slide slide-rainforest">
+          <h2>🌿 Rainforest Journey</h2>
+        </div>
+        <div class="carousel-item journey-slide slide-riverine">
+          <h2>🌊 Riverine Exploration</h2>
+        </div>
+        <div class="carousel-item journey-slide slide-moonwalk">
+          <h2>🌙 Moon Walk</h2>
+        </div>
+      </div>
+      <a
+        class="carousel-control-prev"
+        data-bs-target="#journeyCarousel"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a
+        class="carousel-control-next"
+        data-bs-target="#journeyCarousel"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+    <!-- TOPIC 4: SCROLLSPY -->
+    <nav
+      id="journeyNav"
+      class="navbar navbar-expand navbar-dark bg-dark sticky-top"
+    >
+      <span class="navbar-brand">🌿 Jungle Explorer</span>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#rainforest">Rainforest</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#riverine">Riverine</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#moonwalk">Moon Walk</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container" data-bs-spy="scroll" data-bs-target="#journeyNav">
+      <div class="section" id="rainforest">
+        <h2>🌿 Rainforest Journey</h2>
+        <p>
+          Explore the moist forests and discover unique and colourful animals!
+        </p>
+      </div>
+      <div class="section" id="riverine">
+        <h2>🌊 Riverine Exploration</h2>
+        <p>
+          Walk with the river and enjoy its calm presence while spotting swans
+          and small fish!
+        </p>
+      </div>
+      <div class="section" id="moonwalk">
+        <h2>🌙 Moon Walk</h2>
+        <p>
+          Venture through the jungle under the night's embrace with owls and
+          bats!
+        </p>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

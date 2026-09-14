@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Module 5 - Lesson 2 - Activity 1 - My Planet Cards</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial;
+        background: #f0f4ff;
+        padding: 30px;
+        text-align: center;
+      }
+      h1 {
+        color: #0ea75b;
+      }
+      p {
+        color: #555;
+      }
+      .planet-name {
+        font-size: 22px;
+        font-weight: bold;
+        color: #333;
+      }
+      .planet-fact {
+        color: #666;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+      button {
+        background: #0ea75b;
+        color: white;
+        border: none;
+        padding: 12px 28px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+        
+      }
+
+      .card {
+        min-height: 420px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🌏 My Planet Cards</h1>
+    <p>Use a JavaScript class to build planet cards!</p>
+    <button onclick="showPlanets()">Show Planets!</button>
+    <div class="container mt-5">
+      <div class="row">
+        <div class=" col-12 col-lg-4">
+          <div id="card1"></div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div id="card2"></div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div id="card3"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+              class Planet {
+                  // This is called every time you create an object
+                  constructor(name, fact, distanceFromSun, moons, temperature)
+                   {
+
+                      //Property = Argument value
+      this.name = name;
+      this.fact = fact;
+      this.distanceFromSun = distanceFromSun;
+      this.moons = moons;
+      this.temperature = temperature;
+                  }
+                  createCard() {
+                      return `<div class = "card shadow p-2 border border-success border-3">
+                          <div class = "card-body">
+                          <div class = "planet-name">
+                          ${this.name}
+                          </div>
+
+                          <div class ="planet-fact">
+                              <p><strong> Fact: </strong> ${this.fact}</p>
+                                   <p><strong>Distance From Sun:</strong> ${this.distanceFromSun}</p>
+                                       <p><strong> Moons: </strong> ${this.moons}</p>
+                                           <p><strong> Temperature: </strong> ${this.temperature}</p>
+                                           </div>
+                                           </div>
+                                           </div> `
+                  }
+              }
+              // ------------------------------------------------
+function showPlanets() {
+              let planet1 = new Planet("Earth", "Only planet with life in the Solar System", "149.6 million kilometres", 1, "15 degrees celsius")
+                 let planet2 = new Planet("Venus", "Has a toxic, suffocating atmosphere", "108.2 million kilometres", 0, "464 degrees celsius")
+                    let planet3 = new Planet("Uranus", "Smells like rotten eggs", "2.9 billion kilometres", 29, "-195 degrees celsius")
+
+                    document.getElementById("card1").innerHTML = planet1.createCard()
+                    
+                    document.getElementById("card2").innerHTML = planet2.createCard()
+                    
+                    document.getElementById("card3").innerHTML = planet3.createCard()
+}
+    </script>
+  </body>
+</html>
