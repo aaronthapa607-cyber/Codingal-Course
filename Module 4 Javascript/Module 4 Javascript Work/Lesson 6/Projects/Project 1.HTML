@@ -1,5 +1,211 @@
-<html>
-  <body>
-    <h1>Lesson 6 Project 1</h1>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Digital Zoo Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef1e7;
+      text-align: center;
+      color: #27352d;
+      margin: 0;
+      padding: 32px 16px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #b25e38;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      color: #244c3a;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(32px, 7vw, 44px);
+      margin: 0 0 10px;
+    }
+
+    .intro {
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.5;
+      color: #5b685d;
+    }
+
+    #zoo {
+      width: min(520px, calc(100% - 34px));
+      border: 1px solid #ccd7c8;
+      border-top: 5px solid #315e46;
+      border-radius: 8px;
+      background-color: #fffefa;
+      margin: 24px auto 18px;
+      padding: 12px 18px;
+      box-shadow: 0 10px 28px rgb(36 76 58 / 9%);
+    }
+
+    .zone {
+      border: 1px solid #dce2d7;
+      border-left: 4px solid #6f9b75;
+      border-radius: 5px;
+      margin: 10px 0;
+      padding: 13px 15px;
+      background-color: #f7f8f1;
+      text-align: left;
+    }
+
+    .zone h2 {
+      margin: 0 0 8px;
+      color: #315e46;
+      font-size: 18px;
+    }
+
+    .zone:nth-child(2) { border-left-color: #d28b55; }
+    .zone:nth-child(3) { border-left-color: #75a6b0; }
+
+    .zone p {
+      margin: 0;
+    }
+
+    .animal {
+      font-weight: bold;
+      color: #a9542e;
+    }
+
+    button {
+      background-color: #315e46;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 11px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background-color: #244c3a;
+    }
+
+    button:focus-visible {
+      outline: 3px solid #d28b55;
+      outline-offset: 3px;
+    }
+
+    #output {
+      width: min(520px, calc(100% - 34px));
+      border: 1px solid #ccd7c8;
+      border-radius: 6px;
+      background-color: #fffefa;
+      margin: 18px auto;
+      padding: 16px;
+      text-align: left;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+      box-shadow: 0 6px 18px rgb(36 76 58 / 6%);
+    }
+
+    #output:empty {
+      min-height: 48px;
+    }
+
+    #output strong {
+      color: #315e46;
+    }
+
+    .output-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #b25e38;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 20px 10px; }
+      body { padding: 25px 10px; }
+      #zoo, #output { width: calc(100% - 22px); }
+      #zoo { padding: 8px 12px; }
+    }
+  </style>
+</head>
+<body>
+  <p class="eyebrow">Zoo manager dashboard · 03 habitats</p>
+  <h1>My Digital Zoo Manager</h1>
+  <p class="intro">
+    Review the animal habitats, explore how their DOM elements connect, and update the zoo with JavaScript.
+  </p>
+
+  <div id="zoo">
+    <div class="zone" id="riverHabitat">
+      <h2>Riverbank</h2>
+      <p>Resident: <span class="animal">Otter · Finn</span></p>
+    </div>
+
+    <div class="zone" id="marshHabitat">
+      <h2>Marsh Garden</h2>
+      <p>Resident: <span class="animal">Flamingo · Rosa</span></p>
+    </div>
+
+    <div class="zone" id="canopyHabitat">
+      <h2>Cloud Forest</h2>
+      <p>Resident: <span class="animal">Red panda · Maple</span></p>
+    </div>
+  </div>
+
+  <button type="button" onclick="checkHabitats()">Run zoo check</button>
+
+  <div id="output" aria-live="polite">DOM results will appear here.</div>
+
+  <script>
+    function checkHabitats() {
+      // Select the reserve and each habitat from the page.
+      let zoo = document.getElementById("zoo");
+      let riverHabitat = document.getElementById("riverHabitat");
+      let marshHabitat = document.getElementById("marshHabitat");
+      let canopyHabitat = document.getElementById("canopyHabitat");
+      let output = document.getElementById("output");
+
+      // Follow the habitat links in the DOM tree.
+      let containerName = riverHabitat.parentNode.id;
+      let firstHabitat = zoo.children[0].id;
+      let nextHabitat = zoo.children[1].id;
+      let habitatAfterRiver = riverHabitat.nextElementSibling.id;
+      let habitatBeforeCanopy = canopyHabitat.previousElementSibling.id;
+
+      // Compare an element node with the text node inside it.
+      let habitatNodeType = riverHabitat.nodeType;
+      let textNodeType = riverHabitat.firstChild.nodeType;
+
+      // Mark each habitat and change its heading.
+      riverHabitat.style.backgroundColor = "#e6f1df";
+      marshHabitat.style.backgroundColor = "#fff0d8";
+      canopyHabitat.style.backgroundColor = "#e2f0f2";
+
+      riverHabitat.querySelector("h2").textContent = "Riverbank · Checked";
+      marshHabitat.querySelector("h2").textContent = "Marsh Garden · Checked";
+      canopyHabitat.querySelector("h2").textContent = "Cloud Forest · Checked";
+
+      // Print the details collected from the DOM.
+      output.innerHTML =
+        "<span class='output-label'>DOM results</span>" +
+        "<strong>Tree check</strong><br>" +
+        "Habitat container: " + containerName + "<br>" +
+        "First habitat: " + firstHabitat + "<br>" +
+        "Second habitat: " + nextHabitat + "<br><br>" +
+        "<strong>Neighbor check</strong><br>" +
+        "After the riverbank: " + habitatAfterRiver + "<br>" +
+        "Before the cloud forest: " + habitatBeforeCanopy + "<br><br>" +
+        "<strong>Node type check</strong><br>" +
+        "Habitat element: " + habitatNodeType + " (ELEMENT_NODE)<br>" +
+        "First child text: " + textNodeType + " (TEXT_NODE)";
+    }
+  </script>
+</body>
 </html>

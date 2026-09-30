@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Module 5 - Lesson 2 - Project 1 - Hero Cards</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial;
+        background: #f2f1e9;
+        padding: 30px 16px;
+        text-align: center;
+      }
+      h1 {
+        color: #b52b34;
+        font-weight: 800;
+      }
+      p {
+        color: #555;
+      }
+      .hero-name {
+        font-size: 22px;
+        font-weight: bold;
+        color: #192b3d;
+      }
+      .hero-detail {
+        color: #4d5965;
+        margin-top: 14px;
+        font-size: 14px;
+      }
+      .hero-detail p {
+        margin-bottom: 10px;
+      }
+      button {
+        background: #b52b34;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+        font-weight: bold;
+        box-shadow: 0 4px 0 #762029;
+      }
+      button:hover {
+        background: #92232b;
+      }
+      button:focus-visible {
+        outline: 3px solid #e4ae33;
+        outline-offset: 3px;
+      }
+      .card {
+        min-height: 350px;
+        margin-bottom: 10px;
+      }
+      .hero-card {
+        background: white;
+        border: 1px solid #d5d5d5;
+        border-radius: 8px;
+      }
+      .hero-emblem {
+        margin-bottom: 12px;
+        font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+        font-size: 52px;
+      }
+      .hero-tag {
+        color: #b52b34;
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+      @media (max-width: 575px) {
+        body { padding: 24px 12px; }
+        .card { min-height: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>★ Hero Headquarters</h1>
+    <p>Meet the city's defenders. Choose the button to reveal their hero cards!</p>
+    <button onclick="showHeroes()">Reveal the Hero Lineup</button>
+    <div class="container mt-5">
+      <div class="row">
+        <div class=" col-12 col-lg-4">
+          <div id="card1"></div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div id="card2"></div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div id="card3"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+                class Superhero {
+                  // This is called every time you create a hero object.
+                  constructor(name, identity, power, homeCity, signatureMove, emblem)
+                   {
+
+                    // Store each hero's details in the new object.
+      this.name = name;
+            this.identity = identity;
+            this.power = power;
+            this.homeCity = homeCity;
+            this.signatureMove = signatureMove;
+            this.emblem = emblem;
+                  }
+                  createCard() {
+                    return `<div class="card hero-card shadow p-2 border border-dark border-3">
+                          <div class = "card-body">
+                      <div class="hero-emblem" aria-hidden="true">${this.emblem}</div>
+                      <div class="hero-tag">City defender</div>
+                      <div class="hero-name">
+                          ${this.name}
+                          </div>
+
+                      <div class="hero-detail">
+                        <p><strong>Secret identity:</strong> ${this.identity}</p>
+                        <p><strong>Power:</strong> ${this.power}</p>
+                        <p><strong>Protects:</strong> ${this.homeCity}</p>
+                        <p><strong>Signature move:</strong> ${this.signatureMove}</p>
+                                           </div>
+                                           </div>
+                                           </div> `
+                  }
+              }
+              // ------------------------------------------------
+        function showHeroes() {
+                  const superhero1 = new Superhero("Solar Sentinel", "Mira Sol", "stores and releases sunlight", "Harbor City", "Solar Shield", "☀️");
+                  const superhero2 = new Superhero("Tide Turner", "Kai Rivers", "controls waves and currents", "Bayview", "Tide Tear", "🌊");
+                  const superhero3 = new Superhero("Gear Guardian", "Nia Forge", "builds clever rescue gadgets", "Northpoint", "Metal Barrage", "⚙️");
+
+                  document.getElementById("card1").innerHTML = superhero1.createCard();
+                  document.getElementById("card2").innerHTML = superhero2.createCard();
+                  document.getElementById("card3").innerHTML = superhero3.createCard();
+}
+    </script>
+  </body>
+</html>
