@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My Magic Word Lab</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background: lightyellow;
+      }
+      h1,
+      h3 {
+        color: darkorange;
+      }
+      .box {
+        background: white;
+        color: darkorange;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-4">
+      <h1 class="mb-1">My Magic Word Lab</h1>
+      <p class="text-muted mb-4">
+        Discover types, switch them, find and swap words, and catch sneaky
+        errors!
+      </p>
+      <!-- TOPIC 1: typeof -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">What Type Is It?</h3>
+          <button class="btn btn-warning" onclick="checkTypes()">
+            Check Data Types
+          </button>
+          <div id="typeresult" class="box p-3 mt-3 rounded">
+            Press the button to reveal the secret types!
+          </div>
+        </div>
+      </div>
+      <!-- TOPIC 2: String() and Number() -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">Convert Data Types</h3>
+          <button class="btn btn-warning" onclick="toStr()">
+            Convert Values
+          </button>
+          <div id="convResult" class="box p-3 mt-3 rounded">
+            Turn "88" into a number and 12 into a string by pressing the button!
+          </div>
+        </div>
+      </div>
+      <!-- TOPIC 3: search() and replace() -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">Search and Replace Text</h3>
+          <input
+            id="findW"
+            class="form-control mb-2"
+            placeholder="Word to find (try: Math)"
+          />
+          <input
+            id="swapW"
+            class="form-control mb-2"
+            placeholder="Replace with (try: Coding)"
+          />
+          <button class="btn btn-warning" onclick="replace()">
+            Replace a Word
+          </button>
+          <div id="srResult" class="box p-3 mt-3 rounded">
+            Sentence: "Math is my favourite subject."
+          </div>
+        </div>
+      </div>
+      <!-- TOPIC 4: try/catch -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h3 class="card-title">Error Handler</h3>
+          <input
+            id="divIn"
+            class="form-control mb-2"
+            placeholder="Type a variable name to test the error!"
+          />
+          <button class="btn btn-warning" onclick = "trySafe()">Test Error Handler</button>
+          <div id="errResult" class="box p-3 mt-3 rounded">
+            Try using an undefined variable and see the error message!
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function checkTypes() {
+        let name = "Aaron";
+        let score = 100;
+        let isRevealed = true;
+
+        document.getElementById("typeresult").innerHTML = `
+Variable: name; Value: ${name}; Data Type: ${typeof name} <br>
+Variable: score; Value: ${score}; Data Type: ${typeof score} <br>
+Variable: isRevealed; Value: ${isRevealed}; Data Type: ${typeof isRevealed} <br>
+
+            `;
+      }
+
+      function toStr() {
+        let v = "12";
+        document.getElementById("convResult").innerHTML = String(v);
+      }
+
+      function toNum() {
+        let v = "88";
+        document.getElementById("convResult").innerHTML = Number(v);
+      }
+      }
+
+      let sentence = "Math is my favourite subject";
+
+      function replace() {
+        let phrase = document.getElementById("findW").value.trim();
+        let target = document.getElementById("swapW").value.trim();
+        let updatedSentence = sentence.replace(phrase, target);
+
+        document.getElementById("srResult").innerHTML =
+          `Original: "${sentence}"<br>Updated: "${updatedSentence}"`;
+      }
+
+     function trySafe() {
+
+        try {
+            let name = document.getElementById("divIn").value;
+            if (name === "") {
+                throw "Please type a variable name first!";
+            }
+
+            document.getElementById("errResult").innerHTML =
+                "Trying to use the variable: " + name + "<br>" +
+                "Result: " + missingVariable;
+        }
+        catch (e) {
+            let name = document.getElementById("divIn").value;
+            document.getElementById("errResult").innerHTML =
+                "Oops! An error was caught: The variable \"" + name + "\" does not exist!";
+        }
+        }
+      
+    </script>
+  </body>
+</html>
