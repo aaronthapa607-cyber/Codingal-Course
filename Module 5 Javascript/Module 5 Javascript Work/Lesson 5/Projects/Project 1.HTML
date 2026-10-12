@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Event Data Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f6ff;
+      color: #24344d;
+      text-align: center;
+      padding: 30px 16px;
+      margin: 0;
+    }
+    h1 {
+      color: #244c83;
+      margin-bottom: 8px;
+    }
+    .intro {
+      color: #596b83;
+      margin: 0 auto 22px;
+    }
+    button {
+      background: #28724f;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background: #1f5b3e;
+    }
+    button:focus-visible {
+      outline: 3px solid #e0a526;
+      outline-offset: 3px;
+    }
+    section {
+      box-sizing: border-box;
+      background: white;
+      border: 1px solid #cbd8e8;
+      border-top: 5px solid #e0a526;
+      border-radius: 10px;
+      width: min(100%, 520px);
+      margin: 18px auto;
+      padding: 18px 22px;
+      text-align: left;
+      box-shadow: 0 3px 10px rgba(36, 76, 131, 0.08);
+    }
+    h2 {
+      color: #244c83;
+      font-size: 1.2rem;
+      margin: 0 0 12px;
+    }
+    #status {
+      min-height: 1.2em;
+      color: #28724f;
+      font-weight: bold;
+    }
+    #event-details {
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+    #json-text {
+      display: block;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      color: #344766;
+      font-family: Consolas, monospace;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 480px) {
+      body {
+        padding: 24px 12px;
+      }
+      section {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>School Event Data Viewer</h1>
+  <p class="intro">Load the latest school event details and view the event data as JSON.</p>
+  <button id="load-event-button" type="button" onclick="showSchoolEvent()">Load Event Details</button>
+
+  <section aria-labelledby="status-heading">
+    <h2 id="status-heading">Status</h2>
+    <div id="status" role="status" aria-live="polite">Ready to load event data.</div>
+  </section>
+
+  <section aria-labelledby="details-heading">
+    <h2 id="details-heading">Event Details</h2>
+    <div id="event-details">Click “Load Event Details” to view the details.</div>
+  </section>
+
+  <section aria-labelledby="json-heading">
+    <h2 id="json-heading">JSON Text Output</h2>
+    <pre id="json-text">Event JSON will appear here.</pre>
+  </section>
+
+  <script>
+    const schoolEvent = {
+      eventName: "Mathlete Brawl",
+      date: "1st of January 2027",
+      time: "10:00 AM - 2:00 PM",
+      venue: "Room 27",
+      coordinator: "Mr Thapa",
+      participants: 57,
+      isRegistrationOpen: true
+    };
+    let eventDetailsLoaded = false;
+    let isLoadingEvent = false;
+
+    function showLoadingMessage(message) {
+      document.getElementById("status").textContent = message;
+    }
+
+    function fetchSchoolEventData(callback) {
+      return new Promise(function(resolve) {
+        callback("Loading school event data...");
+        setTimeout(function() {
+          resolve(schoolEvent);
+        }, 2000);
+      });
+    }
+
+    async function showSchoolEvent() {
+      if (eventDetailsLoaded) {
+        alert("Event details have already been loaded!");
+        return;
+      }
+      if (isLoadingEvent) {
+        return;
+      }
+
+      isLoadingEvent = true;
+      const loadButton = document.getElementById("load-event-button");
+      loadButton.disabled = true;
+      const eventDetails = document.getElementById("event-details");
+      const jsonOutput = document.getElementById("json-text");
+      eventDetails.textContent = "";
+      jsonOutput.textContent = "";
+
+      const eventData = await fetchSchoolEventData(showLoadingMessage);
+      const jsonText = JSON.stringify(eventData, null, 2);
+      const loadedEvent = JSON.parse(jsonText);
+
+      let eventMessage = "Event: " + loadedEvent.eventName;
+      eventMessage += "\nDate: " + loadedEvent.date;
+      eventMessage += "\nTime: " + loadedEvent.time;
+      eventMessage += "\nVenue: " + loadedEvent.venue;
+      eventMessage += "\nCoordinator: " + loadedEvent.coordinator;
+      eventMessage += "\nParticipants: " + loadedEvent.participants;
+      eventMessage += "\nRegistration open: " + loadedEvent.isRegistrationOpen;
+
+      eventDetails.textContent = eventMessage;
+      jsonOutput.textContent = jsonText;
+      eventDetailsLoaded = true;
+      isLoadingEvent = false;
+      loadButton.disabled = false;
+      showLoadingMessage("School event data loaded successfully.");
+    }
+  </script>
+</body>
+</html>
