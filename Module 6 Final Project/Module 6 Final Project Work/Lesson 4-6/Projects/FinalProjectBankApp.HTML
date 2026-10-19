@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102b35">
+  <title>Aaron's Bank App</title>
+</head>
+<body>
+
+  <main id="app">
+
+    <p class="eyebrow">YOUR MONEY, IN GOOD COMPANY</p>
+    <h1 id="app-title">Aaron's bank</h1>
+
+    <section id="balance-box" aria-labelledby="balance-label">
+      <p id="balance-label">Available balance</p>
+      <p id="balance">$1,000.00</p>
+      <p class="balance-caption">A little progress adds up.</p>
+    </section>
+
+    <div id="entry-box">
+      <label id="amount-label" for="amount">Enter amount</label>
+      <div class="amount-input-wrap">
+        <span class="currency-symbol" aria-hidden="true">$</span>
+        <input type="number" id="amount" placeholder="0.00" min="0.01" step="0.01" inputmode="decimal">
+      </div>
+    </div>
+
+    <br>
+
+    <div id="button-box">
+      <button class="action credit" id="credit-btn" type="button">＋&nbsp; Credit</button>
+      <button class="action debit" id="debit-btn" type="button">−&nbsp; Debit</button>
+    </div>
+
+    <p id="message" aria-live="polite">Your account is ready when you are.</p>
+    <p id="note">Terms and conditions apply.</p>
+
+  </main>
+
+</body>
+</html>
