@@ -6,7 +6,7 @@ print(y)
 codingal = "codingal"
 print(codingal)
 
-name = input("enter your name: ")
+name = input("Enter your name: ")
 
 print("\nHello", name,"\n Welcome to codingal")
 
